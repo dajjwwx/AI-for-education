@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二维码验证 - 6个部分</title>
+<style>
+  body { margin:0; background:#0a0a1a; color:#fff; font-family:'Segoe UI','Microsoft YaHei',sans-serif; padding:30px; }
+  h1 { text-align:center; color:#00d4ff; margin-bottom:30px; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; max-width:1400px; margin:0 auto; }
+  .card { background:rgba(255,255,255,0.06); border-radius:16px; padding:20px; text-align:center; position:relative; border:6px solid #00d4ff; }
+  .card:nth-child(1) { border-color:#e94560; }
+  .card:nth-child(2) { border-color:#a855f7; }
+  .card:nth-child(3) { border-color:#00d4ff; }
+  .card:nth-child(4) { border-color:#ffd700; }
+  .card:nth-child(5) { border-color:#ff6b6b; }
+  .card:nth-child(6) { border-color:#4ade80; }
+  .badge { position:absolute; top:-15px; left:50%; transform:translateX(-50%); color:#fff; padding:6px 18px; border-radius:14px; font-weight:900; font-size:16px; box-shadow:0 4px 12px rgba(0,0,0,0.4); white-space:nowrap; }
+  .card:nth-child(1) .badge { background:#e94560; }
+  .card:nth-child(2) .badge { background:#a855f7; }
+  .card:nth-child(3) .badge { background:#00d4ff; }
+  .card:nth-child(4) .badge { background:#ffd700; color:#1a1a1a; }
+  .card:nth-child(5) .badge { background:#ff6b6b; }
+  .card:nth-child(6) .badge { background:#4ade80; color:#1a1a1a; }
+  .card h3 { margin:10px 0 15px; font-size:18px; }
+  .card img { width:220px; height:220px; display:block; margin:0 auto; background:#fff; border-radius:8px; padding:8px; }
+  .card .url { font-size:11px; color:rgba(255,255,255,0.4); margin-top:10px; word-break:break-all; }
+  .note { text-align:center; color:rgba(255,255,255,0.5); margin-top:30px; font-size:14px; }
+</style>
+</head>
+<body>
+<h1>📱 6个部分二维码验证</h1>
+<p class="note">每个二维码都不同！扫码后会进入对应部分的答题页面。</p>
+<div class="grid">
+  <div class="card">
+    <div class="badge">第 1 部分</div>
+    <h3>🔴 红色边框</h3>
+    <img src="/api/qr/quiz/1?v=verify" alt="QR 1">
+    <div class="url">/quiz/1 — AI来了，教育不能装睡</div>
+  </div>
+  <div class="card">
+    <div class="badge">第 2 部分</div>
+    <h3>🟣 紫色边框</h3>
+    <img src="/api/qr/quiz/2?v=verify" alt="QR 2">
+    <div class="url">/quiz/2 — AI时代稀缺的六大能力</div>
+  </div>
+  <div class="card">
+    <div class="badge">第 3 部分</div>
+    <h3>🔵 青色边框</h3>
+    <img src="/api/qr/quiz/3?v=verify" alt="QR 3">
+    <div class="url">/quiz/3 — 教师角色再定位</div>
+  </div>
+  <div class="card">
+    <div class="badge">第 4 部分</div>
+    <h3>🟡 金色边框</h3>
+    <img src="/api/qr/quiz/4?v=verify" alt="QR 4">
+    <div class="url">/quiz/4 — AI赋能教学</div>
+  </div>
+  <div class="card">
+    <div class="badge">第 5 部分</div>
+    <h3>🟠 橙色边框</h3>
+    <img src="/api/qr/quiz/5?v=verify" alt="QR 5">
+    <div class="url">/quiz/5 — 课堂教学怎么改</div>
+  </div>
+  <div class="card">
+    <div class="badge">第 6 部分</div>
+    <h3>🟢 绿色边框</h3>
+    <img src="/api/qr/quiz/6?v=verify" alt="QR 6">
+    <div class="url">/quiz/6 — 做AI时代有温度的教育</div>
+  </div>
+</div>
+<p class="note">💡 如果6个二维码看起来"一样"，那是因为它们都指向同一个服务器IP，只有末尾数字不同。<br>但它们的图案确实不同（约30%像素差异）。扫码后可以确认跳转到不同的答题页面。</p>
+</body>
+</html>

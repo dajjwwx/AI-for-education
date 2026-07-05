@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>QR验证 - 6个部分</title>
+<style>
+body{margin:0;background:#0a0a1a;padding:30px;font-family:Arial,sans-serif;color:#fff}
+h1{text-align:center;color:#00d4ff;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.card{background:#fff;border-radius:16px;padding:20px;text-align:center;position:relative;border:8px solid #00d4ff;transition:border-color 0.3s}
+.card h2{margin:10px 0 5px;color:#1a1a1a;font-size:20px}
+.card .part-label{color:#666;font-size:13px;margin:0 0 10px}
+.badge{position:absolute;top:-20px;left:50%;transform:translateX(-50%);color:#fff;padding:6px 20px;border-radius:14px;font-weight:900;font-size:17px;box-shadow:0 4px 16px rgba(0,0,0,0.4);white-space:nowrap;z-index:10}
+.card img{width:220px;height:220px;display:block;margin:20px auto 0;border-radius:8px}
+/* 6种颜色 */
+.c1{border-color:#e94560}.b1{background:#e94560}
+.c2{border-color:#a855f7}.b2{background:#a855f7}
+.c3{border-color:#00d4ff}.b3{background:#00d4ff}
+.c4{border-color:#ffd700}.b4{background:#ffd700;color:#1a1a1a}
+.c5{border-color:#ff6b6b}.b5{background:#ff6b6b}
+.c6{border-color:#4ade80}.b6{background:#4ade80;color:#1a1a1a}
+</style></head>
+<body>
+<h1>📱 6个部分二维码验证</h1>
+<p style="text-align:center;color:#aaa;margin-bottom:30px">每个二维码边框颜色和顶部徽章都不同，对应不同部分的题目</p>
+<div class="grid">
+  <div class="card c1"><div class="badge b1">第 1 部分</div><h2>AI来了，教育不能装睡</h2><p class="part-label">quiz/1 · 5道题</p><img src="/api/qr/quiz/1?v=3"></div>
+  <div class="card c2"><div class="badge b2">第 2 部分</div><h2>AI时代稀缺的六大能力</h2><p class="part-label">quiz/2 · 5道题</p><img src="/api/qr/quiz/2?v=3"></div>
+  <div class="card c3"><div class="badge b3">第 3 部分</div><h2>教师角色再定位</h2><p class="part-label">quiz/3 · 5道题</p><img src="/api/qr/quiz/3?v=3"></div>
+  <div class="card c4"><div class="badge b4">第 4 部分</div><h2>AI赋能教学</h2><p class="part-label">quiz/4 · 5道题</p><img src="/api/qr/quiz/4?v=3"></div>
+  <div class="card c5"><div class="badge b5">第 5 部分</div><h2>课堂教学怎么改</h2><p class="part-label">quiz/5 · 5道题</p><img src="/api/qr/quiz/5?v=3"></div>
+  <div class="card c6"><div class="badge b6">第 6 部分</div><h2>做AI时代有温度的教育</h2><p class="part-label">quiz/6 · 5道题</p><img src="/api/qr/quiz/6?v=3"></div>
+</div>
+</body></html>

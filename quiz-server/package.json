@@ -1,0 +1,14 @@
+{
+  "name": "ai-education-quiz",
+  "version": "1.0.0",
+  "description": "AI教育讲座扫码答题系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "qrcode": "^1.5.3",
+    "qrcodejs2": "^0.0.2"
+  }
+}

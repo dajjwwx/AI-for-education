@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>实时数据看板 - AI教育讲座</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Microsoft YaHei', -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0a0a1a 0%, #12122e 50%, #1a1a3e 100%);
+  min-height: 100vh;
+  color: #fff;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.header h1 {
+  font-size: 1.5em;
+  background: linear-gradient(135deg, #e94560, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header .live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(0,212,255,0.15);
+  font-size: 0.85em;
+  color: #00d4ff;
+}
+.live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #00d4ff;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(0,212,255,0); }
+}
+
+/* ===== Quiz选择器 ===== */
+.quiz-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.quiz-tab {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.quiz-tab:hover { background: rgba(255,255,255,0.08); }
+.quiz-tab.active {
+  border-color: #00d4ff;
+  background: rgba(0,212,255,0.12);
+  color: #00d4ff;
+  box-shadow: 0 0 12px rgba(0,212,255,0.15);
+}
+
+/* ===== 统计卡片 ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+.stat-value {
+  font-size: 2.2em;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-value.cyan { color: #00d4ff; }
+.stat-value.pink { color: #e94560; }
+.stat-value.gold { color: #ffd700; }
+.stat-value.green { color: #4ade80; }
+.stat-label {
+  font-size: 0.85em;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ===== 分布图 ===== */
+.section-title {
+  font-size: 1.1em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #e94560, #00d4ff);
+}
+
+.distribution-chart {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  height: 200px;
+  align-items: flex-end;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.dist-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.dist-bar-fill {
+  width: 70%;
+  border-radius: 8px 8px 0 0;
+  transition: height 0.6s cubic-bezier(0.16,1,0.3,1);
+  min-height: 4px;
+  position: relative;
+}
+.dist-bar-fill .count {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.dist-bar-label {
+  font-size: 0.8em;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+}
+
+/* ===== 逐题统计 ===== */
+.question-stats {
+  margin-bottom: 24px;
+}
+.q-stat-row {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.q-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+.q-stat-text {
+  font-size: 0.95em;
+  flex: 1;
+  line-height: 1.5;
+}
+.q-stat-rate {
+  font-size: 1.3em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.q-stat-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+.q-stat-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.q-stat-wrong {
+  font-size: 0.8em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 6px;
+}
+
+/* ===== 错误分析 ===== */
+.error-analysis {
+  background: rgba(233,69,96,0.08);
+  border: 1px solid rgba(233,69,96,0.2);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.error-analysis h3 {
+  color: #e94560;
+  margin-bottom: 14px;
+  font-size: 1em;
+}
+.error-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.error-item:last-child { margin-bottom: 0; }
+.error-item .eq {
+  font-size: 0.9em;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.8);
+}
+.error-item .ea {
+  font-size: 0.85em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+.error-item .er {
+  font-size: 0.85em;
+  color: #ffd700;
+}
+
+/* ===== 最近提交 ===== */
+.recent-list {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.9em;
+}
+.recent-item:last-child { border-bottom: none; }
+.recent-name { color: rgba(255,255,255,0.8); }
+.recent-score { font-weight: bold; }
+.recent-time { color: rgba(255,255,255,0.3); font-size: 0.85em; }
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255,255,255,0.3);
+}
+.empty-state .icon { font-size: 3em; margin-bottom: 10px; }
+
+.no-errors {
+  text-align: center;
+  padding: 20px;
+  color: #4ade80;
+  font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .header h1 { font-size: 1.2em; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>AI教育讲座 · 实时数据看板</h1>
+  <div class="live-badge">
+    <div class="live-dot"></div>
+    <span id="liveText">实时更新中</span>
+  </div>
+</div>
+
+<div class="quiz-tabs" id="quizTabs"></div>
+
+<div id="dashboardContent">
+  <div class="empty-state">
+    <div class="icon">📊</div>
+    <p>选择上方答题环节查看实时数据</p>
+  </div>
+</div>
+
+<script>
+let currentQuizId = null;
+let quizList = [];
+let pollTimer = null;
+
+// 加载quiz列表
+async function loadQuizList() {
+  const res = await fetch('/api/quizzes');
+  quizList = await res.json();
+
+  const tabsHtml = quizList.map(q =>
+    `<div class="quiz-tab" data-id="${q.id}" onclick="selectQuiz(${q.id})">${q.section}</div>`
+  ).join('');
+  document.getElementById('quizTabs').innerHTML = tabsHtml;
+
+  // 默认选第一个
+  if (quizList.length > 0) {
+    selectQuiz(quizList[0].id);
+  }
+}
+
+function selectQuiz(id) {
+  currentQuizId = id;
+  document.querySelectorAll('.quiz-tab').forEach(t => {
+    t.classList.toggle('active', parseInt(t.dataset.id) === id);
+  });
+
+  if (pollTimer) clearInterval(pollTimer);
+  loadStats();
+  pollTimer = setInterval(loadStats, 3000);
+}
+
+async function loadStats() {
+  if (!currentQuizId) return;
+
+  try {
+    const res = await fetch(`/api/stats/${currentQuizId}`);
+    const data = await res.json();
+    renderStats(data);
+  } catch (e) {
+    console.error('Failed to load stats:', e);
+  }
+}
+
+function renderStats(data) {
+  const container = document.getElementById('dashboardContent');
+
+  if (data.totalResponses === 0) {
+    container.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value cyan">0</div>
+          <div class="stat-label">答题人数</div>
+        </div>
+      </div>
+      <div class="empty-state">
+        <div class="icon">⏳</div>
+        <p>等待学生扫码答题...</p>
+        <p style="font-size:0.85em;margin-top:8px">当前环节：${data.quizTitle}</p>
+      </div>
+    `;
+    return;
+  }
+
+  // 分数分布柱状图
+  const distColors = {
+    '90-100': '#4ade80',
+    '80-89': '#00d4ff',
+    '60-79': '#ffd700',
+    '0-59': '#e94560'
+  };
+  const distLabels = {
+    '90-100': '90-100分',
+    '80-89': '80-89分',
+    '60-79': '60-79分',
+    '0-59': '0-59分'
+  };
+
+  const maxDist = Math.max(...Object.values(data.distribution), 1);
+
+  const distHtml = Object.keys(data.distribution).map(key => {
+    const count = data.distribution[key];
+    const height = (count / maxDist) * 100;
+    return `
+      <div class="dist-bar">
+        <div class="dist-bar-fill" style="height:${height}%;background:${distColors[key]}">
+          ${count > 0 ? `<span class="count" style="color:${distColors[key]}">${count}</span>` : ''}
+        </div>
+        <div class="dist-bar-label">${distLabels[key]}</div>
+      </div>
+    `;
+  }).join('');
+
+  // 逐题统计
+  const qStatsHtml = data.questionStats.map(q => {
+    const rate = q.correctRate;
+    const color = rate >= 80 ? '#4ade80' : rate >= 60 ? '#ffd700' : '#e94560';
+
+    // 错误选项分布
+    let wrongHtml = '';
+    const wrongEntries = Object.entries(q.wrongOptions).sort((a,b) => b[1] - a[1]);
+    if (wrongEntries.length > 0) {
+      wrongHtml = `<div class="q-stat-wrong">常见错误：${wrongEntries.map(([k,v]) => `${k}(${v}人)`).join('、')}</div>`;
+    }
+
+    return `
+      <div class="q-stat-row">
+        <div class="q-stat-header">
+          <div class="q-stat-text">${q.questionId}. ${q.question}</div>
+          <div class="q-stat-rate" style="color:${color}">${rate}%</div>
+        </div>
+        <div class="q-stat-bar">
+          <div class="q-stat-bar-fill" style="width:${rate}%;background:${color}"></div>
+        </div>
+        ${wrongHtml}
+      </div>
+    `;
+  }).join('');
+
+  // 错误分析
+  let errorHtml = '';
+  if (data.commonErrors.length > 0) {
+    errorHtml = data.commonErrors.map(e => `
+      <div class="error-item">
+        <div class="eq">❓ ${e.question}</div>
+        <div class="ea">⚠️ ${e.errorAnalysis}</div>
+        <div class="er">📚 ${e.recommendation}</div>
+      </div>
+    `).join('');
+  } else {
+    errorHtml = '<div class="no-errors">✓ 本环节所有题目正确率均达标，无薄弱环节</div>';
+  }
+
+  // 最近提交
+  const recentHtml = data.recentSubmissions.map(s => {
+    const time = new Date(s.submittedAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+    const color = s.score >= 80 ? '#4ade80' : s.score >= 60 ? '#ffd700' : '#e94560';
+    return `
+      <div class="recent-item">
+        <span class="recent-name">${s.name}</span>
+        <span class="recent-score" style="color:${color}">${s.score}分</span>
+        <span class="recent-time">${time}</span>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value cyan">${data.totalResponses}</div>
+        <div class="stat-label">答题人数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value gold">${data.avgScore}</div>
+        <div class="stat-label">平均分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value green">${data.maxScore}</div>
+        <div class="stat-label">最高分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value pink">${data.minScore}</div>
+        <div class="stat-label">最低分</div>
+      </div>
+    </div>
+
+    <div class="section-title">分数分布</div>
+    <div class="distribution-chart">${distHtml}</div>
+
+    <div class="section-title">逐题正确率</div>
+    <div class="question-stats">${qStatsHtml}</div>
+
+    <div class="section-title">薄弱环节分析与学习推荐</div>
+    <div class="error-analysis">
+      ${data.commonErrors.length > 0 ? '<h3>⚠️ 以下题目正确率低于60%，需要重点复习</h3>' : ''}
+      ${errorHtml}
+    </div>
+
+    <div class="section-title">最近提交</div>
+    <div class="recent-list">${recentHtml}</div>
+  `;
+}
+
+// 启动
+loadQuizList();
+</script>
+</body>
+</html>

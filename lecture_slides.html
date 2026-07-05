@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI时代，教育何为？—— 新时代教师的历史使命</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+
+/* ===== 全局重置 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --neon-pink: #e94560;
+  --neon-cyan: #00d4ff;
+  --neon-purple: #a855f7;
+  --neon-gold: #ffd700;
+  --dark-1: #0a0a1a;
+  --dark-2: #12122e;
+  --dark-3: #1a1a3e;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+}
+
+body {
+  font-family: 'Noto Sans SC', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  background: var(--dark-1);
+  color: #fff;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ===== 粒子画布 ===== */
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== 幻灯片容器 ===== */
+.slide-container { width: 100vw; height: 100vh; position: relative; z-index: 1; }
+
+.slide {
+  display: none;
+  width: 100%; height: 100%;
+  padding: 60px 80px;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide.active {
+  display: flex;
+  animation: slideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.92) translateY(30px); filter: blur(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+/* ===== 动态背景 ===== */
+.bg-aurora {
+  background: linear-gradient(135deg, #0a0a1a 0%, #12122e 30%, #1a1a3e 60%, #0f3460 100%);
+  background-size: 400% 400%;
+  animation: auroraShift 12s ease-in-out infinite;
+}
+@keyframes auroraShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.bg-aurora2 {
+  background: linear-gradient(135deg, #0f3460 0%, #1a1a3e 40%, #12122e 70%, #0a0a1a 100%);
+  background-size: 400% 400%;
+  animation: auroraShift 15s ease-in-out infinite reverse;
+}
+
+.bg-light {
+  background: linear-gradient(135deg, #eef2f8 0%, #dbe2f0 50%, #c9d4ea 100%);
+  background-size: 200% 200%;
+  animation: auroraShift 18s ease-in-out infinite;
+  color: #1a1a2e;
+}
+
+.bg-warm {
+  background: linear-gradient(135deg, #1a0510 0%, #4a0e2e 30%, #801336 60%, #c72c41 100%);
+  background-size: 400% 400%;
+  animation: auroraShift 14s ease-in-out infinite;
+}
+
+.bg-finale {
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a0530 25%, #2d0a40 50%, #4a0e5e 75%, #0a0a1a 100%);
+  background-size: 400% 400%;
+  animation: auroraShift 10s ease-in-out infinite;
+}
+
+/* ===== 浮动光斑 ===== */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 { width: 400px; height: 400px; background: var(--neon-pink); top: -100px; left: -100px; animation: floatOrb 8s ease-in-out infinite; }
+.orb-2 { width: 350px; height: 350px; background: var(--neon-cyan); bottom: -80px; right: -80px; animation: floatOrb 10s ease-in-out infinite reverse; }
+.orb-3 { width: 300px; height: 300px; background: var(--neon-purple); top: 40%; left: 60%; animation: floatOrb 12s ease-in-out infinite; }
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.15); }
+  66% { transform: translate(-40px, 50px) scale(0.9); }
+}
+
+/* ===== 文字样式 ===== */
+h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  z-index: 2;
+  line-height: 1.3;
+  font-weight: 900;
+  position: relative;
+}
+
+h1.glow-text {
+  text-shadow: 0 0 20px rgba(233,69,96,0.6), 0 0 40px rgba(233,69,96,0.4), 0 0 80px rgba(233,69,96,0.2);
+  animation: textGlow 3s ease-in-out infinite;
+}
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(233,69,96,0.6), 0 0 40px rgba(233,69,96,0.4), 0 0 80px rgba(233,69,96,0.2); }
+  50% { text-shadow: 0 0 30px rgba(0,212,255,0.6), 0 0 60px rgba(0,212,255,0.4), 0 0 100px rgba(0,212,255,0.2); }
+}
+
+h2 {
+  font-size: 2.4em;
+  margin-bottom: 30px;
+  z-index: 2;
+  color: var(--neon-pink);
+  font-weight: 700;
+  position: relative;
+}
+
+h3 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  z-index: 2;
+  color: var(--dark-3);
+  position: relative;
+}
+
+p, li {
+  font-size: 1.35em;
+  line-height: 1.8;
+  z-index: 2;
+  position: relative;
+}
+
+ul, ol { margin-left: 40px; z-index: 2; position: relative; }
+li { margin-bottom: 12px; }
+
+.highlight {
+  color: var(--neon-pink);
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(233,69,96,0.5);
+}
+
+.highlight-cyan {
+  color: var(--neon-cyan);
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(0,212,255,0.5);
+}
+
+/* ===== 文字逐元素入场动画 ===== */
+.slide.active .anim-up {
+  opacity: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.slide.active .anim-up:nth-child(1) { animation-delay: 0.2s; }
+.slide.active .anim-up:nth-child(2) { animation-delay: 0.4s; }
+.slide.active .anim-up:nth-child(3) { animation-delay: 0.6s; }
+.slide.active .anim-up:nth-child(4) { animation-delay: 0.8s; }
+.slide.active .anim-up:nth-child(5) { animation-delay: 1.0s; }
+.slide.active .anim-up:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 副标题 ===== */
+.subtitle {
+  font-size: 1.5em;
+  color: var(--neon-cyan);
+  margin-top: 20px;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 0 15px rgba(0,212,255,0.4);
+}
+
+.author {
+  font-size: 1.1em;
+  margin-top: 40px;
+  color: rgba(255,255,255,0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.center-text { text-align: center; }
+
+/* ===== 两栏布局 ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  z-index: 2;
+  position: relative;
+}
+
+/* ===== 玻璃卡片 ===== */
+.card {
+  background: var(--glass-bg);
+  padding: 30px;
+  border-radius: 16px;
+  border-left: 4px solid var(--neon-pink);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--neon-pink);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s;
+}
+
+.slide.active .card:hover::before { left: 100%; }
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(233,69,96,0.25), 0 0 30px rgba(0,212,255,0.15);
+  border-left-width: 6px;
+}
+
+.card-light {
+  background: rgba(255,255,255,0.95);
+  color: #1a1a2e;
+  padding: 25px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.card-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.card-light:hover::after { transform: scaleX(1); }
+
+.card-light:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.card-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: var(--dark-3);
+  margin-bottom: 15px;
+}
+
+/* ===== 视频提示框 ===== */
+.video-box {
+  background: rgba(233,69,96,0.12);
+  border: 2px solid var(--neon-pink);
+  padding: 25px;
+  border-radius: 14px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 0 30px rgba(233,69,96,0.2), inset 0 0 20px rgba(233,69,96,0.05);
+  animation: videoPulse 3s ease-in-out infinite;
+}
+@keyframes videoPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(233,69,96,0.2), inset 0 0 20px rgba(233,69,96,0.05); }
+  50% { box-shadow: 0 0 50px rgba(233,69,96,0.4), inset 0 0 30px rgba(233,69,96,0.1); }
+}
+
+.video-box a { color: #fff; font-size: 1.2em; text-decoration: none; }
+.video-box a:hover { text-decoration: underline; }
+
+.qr-hint { font-size: 1em; color: rgba(255,255,255,0.5); margin-top: 10px; }
+
+/* ===== 大问号 ===== */
+.big-q {
+  font-size: 2.5em;
+  text-align: center;
+  padding: 60px 0;
+  color: var(--neon-pink);
+  font-weight: bold;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 0 30px rgba(233,69,96,0.5), 0 0 60px rgba(233,69,96,0.3);
+}
+
+/* ===== 能力网格 ===== */
+.ability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  z-index: 2;
+  position: relative;
+}
+
+.ability-card {
+  background: var(--glass-bg);
+  padding: 25px;
+  border-radius: 14px;
+  border-top: 4px solid var(--neon-pink);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-top: 4px solid var(--neon-pink);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.ability-card:hover {
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: 0 20px 40px rgba(233,69,96,0.3);
+  border-top-color: var(--neon-cyan);
+}
+
+.ability-card h3 {
+  font-size: 1.3em;
+  color: var(--neon-pink);
+  margin-bottom: 10px;
+}
+
+.ability-card p { font-size: 1em; }
+
+/* ===== 导航 ===== */
+.nav {
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+}
+
+.nav button {
+  background: rgba(233,69,96,0.3);
+  color: #fff;
+  border: 1px solid var(--neon-pink);
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav button::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  border-radius: 50%;
+  background: rgba(233,69,96,0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.nav button:hover::before { width: 300px; height: 300px; }
+.nav button:hover { background: var(--neon-pink); box-shadow: 0 0 25px rgba(233,69,96,0.6); }
+.nav button span { position: relative; z-index: 1; }
+
+.slide-num {
+  position: fixed;
+  bottom: 35px;
+  left: 40px;
+  color: rgba(255,255,255,0.35);
+  font-size: 1em;
+  z-index: 100;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 进度条 ===== */
+.progress-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 5px;
+  background: rgba(255,255,255,0.05);
+  z-index: 100;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+  background-size: 200% 100%;
+  animation: progressGradient 3s linear infinite;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 15px rgba(233,69,96,0.6), 0 0 30px rgba(0,212,255,0.3);
+}
+@keyframes progressGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ===== 讨论框 ===== */
+.discussion {
+  background: rgba(0,212,255,0.08);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 5px solid var(--neon-cyan);
+  margin-top: 30px;
+  z-index: 2;
+  position: relative;
+  backdrop-filter: blur(8px);
+}
+
+.discussion p { font-size: 1.1em; color: #aac; }
+
+/* ===== 表格 ===== */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; z-index: 2; position: relative; }
+th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); }
+th {
+  background: rgba(233,69,96,0.2);
+  color: #fff;
+  font-size: 1.1em;
+  backdrop-filter: blur(10px);
+}
+
+.white-table { background: rgba(255,255,255,0.95); color: #1a1a2e; border-radius: 12px; overflow: hidden; }
+.white-table th { background: linear-gradient(135deg, #0f3460, #1a1a3e); color: #fff; }
+.white-table th, .white-table td { border-bottom: 1px solid #ddd; }
+.white-table tr { transition: all 0.3s; }
+.white-table tr:hover { background: rgba(233,69,96,0.05); transform: translateX(4px); }
+
+/* ===== 章节标题特殊样式 ===== */
+.chapter-num {
+  font-size: 1.5em;
+  color: var(--neon-cyan);
+  letter-spacing: 8px;
+  margin-bottom: 15px;
+  z-index: 2;
+  position: relative;
+  text-shadow: 0 0 20px rgba(0,212,255,0.5);
+}
+
+.chapter-line {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+  margin: 20px 0;
+  border-radius: 2px;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 0 15px rgba(233,69,96,0.5);
+}
+
+/* ===== 打字机效果 ===== */
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid var(--neon-pink);
+  white-space: nowrap;
+  animation: typing 3s steps(30, end), blinkCursor 0.7s step-end infinite;
+  z-index: 2;
+  position: relative;
+}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blinkCursor { 50% { border-color: transparent; } }
+
+/* ===== 浮动动画 ===== */
+.float { animation: floatY 4s ease-in-out infinite; }
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* ===== 脉冲发光 ===== */
+.pulse-glow { animation: pulseGlow 2.5s ease-in-out infinite; }
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(233,69,96,0.3); }
+  50% { box-shadow: 0 0 50px rgba(233,69,96,0.6), 0 0 80px rgba(0,212,255,0.3); }
+}
+
+/* ===== 扫描线效果 ===== */
+.scan-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  opacity: 0.5;
+  z-index: 3;
+  animation: scanMove 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanMove {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ===== 键盘提示 ===== */
+.kbd-hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.25);
+  font-size: 0.85em;
+  z-index: 100;
+  animation: fadeBlink 4s ease-in-out infinite;
+}
+@keyframes fadeBlink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .slide { padding: 30px 25px; }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.6em; }
+  p, li { font-size: 1.1em; }
+  .two-col, .ability-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- 粒子背景 -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- 进度条 -->
+<div class="progress-container">
+  <div class="progress-bar" id="progress" style="width: 3.5%"></div>
+</div>
+
+<div class="slide-container">
+
+<!-- ========== 幻灯片1：封面 ========== -->
+<div class="slide active bg-aurora" id="slide-1" style="align-items:center;text-align:center">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="scan-line"></div>
+  <h1 class="glow-text anim-up">AI时代，教育何为？</h1>
+  <div class="chapter-line anim-up"></div>
+  <p class="subtitle anim-up">新时代教师的历史使命与教学变革</p>
+  <p class="author anim-up">主讲人：左昌伦</p>
+  <p class="author anim-up" style="margin-top:10px">2026年7月 · 暑期教师培训讲座</p>
+  <div class="slide-num">1 / 28</div>
+</div>
+
+<!-- ========== 幻灯片2：核心问题 ========== -->
+<div class="slide bg-aurora2" id="slide-2">
+  <div class="glow-orb orb-1" style="background:var(--neon-purple)"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="big-q anim-up float">
+    🤔 AI时代来了，<br>我们到底要培养什么样的人？
+  </div>
+  <p class="subtitle center-text anim-up">带着这个问题，开始今天的讲座</p>
+  <div class="slide-num">2 / 28</div>
+</div>
+
+<!-- ========== 幻灯片3：视频引入 ========== -->
+<div class="slide bg-warm" id="slide-3">
+  <div class="glow-orb orb-1" style="background:#ff6b6b"></div>
+  <div class="glow-orb orb-3" style="background:#ffd700"></div>
+  <h2 class="anim-up">🎬 开场视频：全球大厂开始招聘高中生？</h2>
+  <div class="video-box anim-up pulse-glow">
+    <p>📺 视频主讲：尹烨（生物学科普学家）</p>
+    <p style="margin-top:15px">核心观点：AI淘汰标准化劳动，<br>企业招聘不再唯学历，能力优先</p>
+    <a href="https://www.bilibili.com/video/BV125Q4BEEq5" target="_blank" style="display:inline-block;margin-top:20px;padding:10px 25px;background:rgba(233,69,96,0.8);border-radius:8px;color:#fff;font-size:1.1em;text-decoration:none;box-shadow:0 0 20px rgba(233,69,96,0.5)">▶ 立即观看视频</a>
+    <p class="qr-hint" style="margin-top:10px">B站：BV125Q4BEEq5</p>
+  </div>
+  <div class="discussion anim-up">
+    <p>💬 讨论：AI能取代什么？AI取代不了什么？</p>
+  </div>
+  <div class="slide-num">3 / 28</div>
+</div>
+
+<!-- ========== 幻灯片4：AI擅长 vs AI做不了 ========== -->
+<div class="slide bg-light" id="slide-4">
+  <div class="scan-line"></div>
+  <h2 style="color:#0f3460" class="anim-up">AI擅长 vs AI做不了</h2>
+  <table class="white-table anim-up">
+    <tr><th style="width:50%">✅ AI擅长的（已被替代）</th><th>❌ AI做不了的（教师价值）</th></tr>
+    <tr><td>知识检索与记忆</td><td>价值观引导与人格塑造</td></tr>
+    <tr><td>标准化题目批改</td><td>情感陪伴与心理支持</td></tr>
+    <tr><td>基础写作与翻译</td><td>课堂氛围与即时互动</td></tr>
+    <tr><td>重复讲解</td><td>因材施教的温度</td></tr>
+    <tr><td>数据分析</td><td>创新思维与审美判断</td></tr>
+  </table>
+  <p style="margin-top:30px;font-size:1.2em;color:#e94560;text-align:center" class="highlight anim-up">
+    AI擅长"处理信息"，但人不只需要"处理信息"——人需要意义、需要情感、需要创造力
+  </p>
+  <div class="slide-num">4 / 28</div>
+</div>
+
+<!-- ========== 幻灯片5：第一章标题 ========== -->
+<div class="slide bg-aurora2" id="slide-5">
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="chapter-num anim-up">CHAPTER ONE</div>
+  <h1 class="glow-text anim-up">AI时代稀缺的六大能力</h1>
+  <div class="chapter-line anim-up"></div>
+  <p class="subtitle anim-up">人才培养目标重塑</p>
+  <a href="https://www.bilibili.com/video/BV1Q1DXBFEC4" target="_blank" class="anim-up" style="display:inline-block;margin-top:15px;padding:8px 20px;background:rgba(0,212,255,0.3);border:1px solid #00d4ff;border-radius:8px;color:#00d4ff;font-size:0.9em;text-decoration:none;box-shadow:0 0 15px rgba(0,212,255,0.3)">▶ 配合视频：黄仁勋·AI时代6大稀缺能力</a>
+  <div class="slide-num">5 / 28</div>
+</div>
+
+<!-- ========== 幻灯片6：能力一 ========== -->
+<div class="slide bg-light" id="slide-6">
+  <h2 style="color:#0f3460" class="anim-up">能力一：精准提问能力（Prompt思维）</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">💡 核心</p>
+    <p>AI只能回答问题，无法自主定义有价值的问题。好问题远比重构答案更值钱。</p>
+  </div>
+  <div class="card-light anim-up">
+    <p class="card-title">🛠️ 课堂实操</p>
+    <p>每节课留5分钟"好问题时间"；教学生用"身份+任务+要求+格式"模板向AI提问；评价不仅看"答得对不对"，更看"问得好不好"。</p>
+  </div>
+  <div class="discussion anim-up" style="background:#f0f0f0;color:#333;border-left-color:#0f3460">
+    <p>🤔 反思：我们平时是不是太喜欢"正确答案"了？有没有给过学生提问的空间？</p>
+  </div>
+  <div class="slide-num">6 / 28</div>
+</div>
+
+<!-- ========== 幻灯片7：能力二 ========== -->
+<div class="slide bg-light" id="slide-7">
+  <h2 style="color:#0f3460" class="anim-up">能力二：原创创造能力</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">💡 核心</p>
+    <p>AI依靠过往数据做概率生成，只能复刻已有内容。人类独有的灵感、从零到一的突破性创新，机器无法复刻。</p>
+  </div>
+  <div class="card-light anim-up">
+    <p class="card-title">🛠️ 课堂实操</p>
+    <p>减少"标准答案"训练，增加"开放题"比重；鼓励学生"异想天开"；跨学科融合教学。</p>
+  </div>
+  <p style="margin-top:20px;font-size:1.2em;color:#e94560;text-align:center" class="highlight anim-up">
+    AI会拼接存量，人类要创造增量
+  </p>
+  <div class="slide-num">7 / 28</div>
+</div>
+
+<!-- ========== 幻灯片8：能力三 ========== -->
+<div class="slide bg-light" id="slide-8">
+  <h2 style="color:#0f3460" class="anim-up">能力三：审美与品位判断力</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">💡 核心</p>
+    <p>AI可以批量产出内容，但没有真实主观感受，分不清"高级"与"有温度"。审美是取舍、调性、人文质感的综合判断。</p>
+  </div>
+  <div class="card-light anim-up">
+    <p class="card-title">🛠️ 课堂实操</p>
+    <p>任何学科都有审美：数学的简洁之美、物理的对称之美、文学的意境之美；带学生赏析"好作品"的差异；鼓励创造"有美感"的作业。</p>
+  </div>
+  <div class="slide-num">8 / 28</div>
+</div>
+
+<!-- ========== 幻灯片9：能力四五六 ========== -->
+<div class="slide bg-light" id="slide-9">
+  <h2 style="color:#0f3460" class="anim-up">能力四：价值决策能力</h2>
+  <h2 style="color:#0f3460;font-size:1.8em;margin-top:-15px" class="anim-up">能力五：共情协作能力</h2>
+  <h2 style="color:#0f3460;font-size:1.8em;margin-top:-15px" class="anim-up">能力六：长期愿景与韧性</h2>
+  <div class="card-light anim-up">
+    <p><strong>价值决策：</strong>AI只有数据，无法判断伦理与长期利弊。课堂中引入"两难情境"讨论。</p>
+    <p style="margin-top:15px"><strong>共情协作：</strong>AI无真实情感。增加小组合作，教学生"倾听"而非只是"表达"。</p>
+    <p style="margin-top:15px"><strong>长期韧性：</strong>AI只处理当下任务。帮助学生建立成长型思维，正确看待失败。</p>
+  </div>
+  <div class="slide-num">9 / 28</div>
+</div>
+
+<!-- ========== 幻灯片10：知识容器到能力提升 ========== -->
+<div class="slide bg-aurora2" id="slide-10">
+  <div class="glow-orb orb-1"></div>
+  <h2 class="anim-up">从"知识容器"到"能力提升"</h2>
+  <div class="two-col">
+    <div class="card anim-up">
+      <h3>传统培养目标</h3>
+      <p>知识记忆能力强<br>刷题速度快<br>标准答案命中率高<br>听话、守规矩<br>单打独斗<br>短期冲刺能力</p>
+    </div>
+    <div class="card anim-up" style="border-left-color:var(--neon-cyan)">
+      <h3 style="color:var(--neon-cyan)">AI时代培养目标</h3>
+      <p><span class="highlight-cyan">精准提问能力强</span><br><span class="highlight-cyan">原创创造能力强</span><br><span class="highlight-cyan">审美判断能力强</span><br><span class="highlight-cyan">价值决策能力强</span><br><span class="highlight-cyan">共情协作能力强</span><br><span class="highlight-cyan">长期韧性能力强</span></p>
+    </div>
+  </div>
+  <p style="margin-top:30px;text-align:center;font-size:1.2em" class="highlight anim-up">
+    知识是载体，能力是目标
+  </p>
+  <div class="slide-num">10 / 28</div>
+</div>
+
+<!-- ========== 幻灯片11：偏远地区两手准备 ========== -->
+<div class="slide bg-warm" id="slide-11">
+  <div class="glow-orb orb-2" style="background:#ffd700"></div>
+  <h2 class="anim-up">🏔️ 偏远地区学生的"两手准备"</h2>
+  <div class="card anim-up" style="background:rgba(255,255,255,0.1);backdrop-filter:blur(10px)">
+    <p class="card-title" style="color:#fff">高考，我们要认真对待</p>
+    <p>对于偏远地区学生，高考依然是改变命运最重要的通道。我们不否定高考，而是要更好地应对高考。</p>
+  </div>
+  <div class="card anim-up" style="background:rgba(255,255,255,0.1);margin-top:20px;backdrop-filter:blur(10px);border-left-color:var(--neon-cyan)">
+    <p class="card-title" style="color:#fff">但只有高考分数，是不够的</p>
+    <p>进了大学后，偏远地区学生往往"后劲不足"——只会刷题，不会自主学习。AI时代，这个问题会更突出。</p>
+  </div>
+  <p style="margin-top:30px;text-align:center;font-size:1.3em" class="highlight anim-up">
+    既不放弃高考，又让学生"既考得好，也走得更远"
+  </p>
+  <div class="slide-num">11 / 28</div>
+</div>
+
+<!-- ========== 幻灯片12：第二章标题 ========== -->
+<div class="slide bg-aurora2" id="slide-12">
+  <div class="glow-orb orb-1" style="background:var(--neon-purple)"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="chapter-num anim-up">CHAPTER TWO</div>
+  <h1 class="glow-text anim-up">教师角色再定位</h1>
+  <div class="chapter-line anim-up"></div>
+  <p class="subtitle anim-up">主导与主体的辩证统一</p>
+  <div class="slide-num">12 / 28</div>
+</div>
+
+<!-- ========== 幻灯片13：澄清误区 ========== -->
+<div class="slide bg-aurora" id="slide-13">
+  <div class="glow-orb orb-2"></div>
+  <h2 class="anim-up">❌ 澄清误区："教书给AI，教师只育人"？</h2>
+  <div class="two-col">
+    <div class="card anim-up">
+      <p class="card-title">对的一半</p>
+      <p>教师确实应该更加关注"育人"</p>
+    </div>
+    <div class="card anim-up" style="border-left-color:var(--neon-cyan)">
+      <p class="card-title" style="color:var(--neon-cyan)">错的一半</p>
+      <p>教书和育人，从来就不能分开</p>
+    </div>
+  </div>
+  <div style="margin-top:40px;text-align:center;font-size:2em" class="highlight anim-up pulse-glow" style="display:inline-block;padding:20px 40px;border-radius:12px">
+    教师主导 + 学生主体 = 好课堂<br>这两个，都不能变！
+  </div>
+  <div class="slide-num">13 / 28</div>
+</div>
+
+<!-- ========== 幻灯片14：为什么不能变 ========== -->
+<div class="slide bg-light" id="slide-14">
+  <div class="scan-line"></div>
+  <h2 style="color:#0f3460" class="anim-up">为什么"教师主导+学生主体"不能变？</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">🎯 教师主导不能变</p>
+    <p>价值观需要引导（不是放任自流）；课堂需要设计（不是随意发散）；学困生需要陪伴（AI没有温度）。</p>
+  </div>
+  <div class="card-light anim-up" style="margin-top:20px">
+    <p class="card-title">🎯 学生主体不能变</p>
+    <p>学习是学生自己的事（别人替代不了）；内驱力来自自主（不来自灌输）；AI是工具（用工具的人是学生）。</p>
+  </div>
+  <div class="slide-num">14 / 28</div>
+</div>
+
+<!-- ========== 幻灯片15：视频 阜南亲情学校 ========== -->
+<div class="slide bg-warm" id="slide-15">
+  <div class="glow-orb orb-1" style="background:#ff6b6b"></div>
+  <h2 class="anim-up">🎬 案例视频：阜南亲情学校数学老师自述</h2>
+  <div class="video-box anim-up pulse-glow">
+    <p>📺 22分钟完整演讲</p>
+    <p style="margin-top:15px">核心观点：</p>
+    <p>"把教书交给科技，把育人留给自己<br>──但教书的质量，反而更高了"</p>
+    <a href="https://www.bilibili.com/video/BV1vj1XBHEhd" target="_blank" style="display:inline-block;margin-top:20px;padding:10px 25px;background:rgba(233,69,96,0.8);border-radius:8px;color:#fff;font-size:1.1em;text-decoration:none;box-shadow:0 0 20px rgba(233,69,96,0.5)">▶ 立即观看视频</a>
+    <p class="qr-hint" style="margin-top:10px">B站：BV1vj1XBHEhd</p>
+  </div>
+  <div class="discussion anim-up">
+    <p>💬 这位老师的故事，对您有什么启发？</p>
+  </div>
+  <div class="slide-num">15 / 28</div>
+</div>
+
+<!-- ========== 幻灯片16：教师四种身份 ========== -->
+<div class="slide bg-aurora2" id="slide-16">
+  <div class="glow-orb orb-3"></div>
+  <h2 class="anim-up">AI时代教师的四种身份</h2>
+  <div class="ability-grid">
+    <div class="ability-card anim-up">
+      <h3>1️⃣ 学习设计师</h3>
+      <p>设计学习路径、选择学习资源、搭建学习场景（首要身份）</p>
+    </div>
+    <div class="ability-card anim-up">
+      <h3>2️⃣ 学情诊断师</h3>
+      <p>用数据了解每个学生的真实状态，精准干预</p>
+    </div>
+    <div class="ability-card anim-up">
+      <h3>3️⃣ 内驱力激发师</h3>
+      <p>点燃学生的好奇心，让学生愿意学、喜欢学</p>
+    </div>
+    <div class="ability-card anim-up">
+      <h3>4️⃣ 价值观引导师</h3>
+      <p>AI不讲价值观，这件事只能老师来做</p>
+    </div>
+  </div>
+  <div class="slide-num">16 / 28</div>
+</div>
+
+<!-- ========== 幻灯片17：第三章标题 ========== -->
+<div class="slide bg-aurora2" id="slide-17">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2" style="background:var(--neon-gold)"></div>
+  <div class="chapter-num anim-up">CHAPTER THREE</div>
+  <h1 class="glow-text anim-up">AI赋能教学</h1>
+  <div class="chapter-line anim-up"></div>
+  <p class="subtitle anim-up">偏远地区的弯道超车机会</p>
+  <div class="slide-num">17 / 28</div>
+</div>
+
+<!-- ========== 幻灯片18：AI拉平教育资源 ========== -->
+<div class="slide bg-aurora" id="slide-18">
+  <div class="glow-orb orb-1" style="background:var(--neon-gold)"></div>
+  <div class="glow-orb orb-3"></div>
+  <h2 class="anim-up">🌍 AI让优质教育资源触手可及</h2>
+  <div class="big-q anim-up float" style="font-size:1.8em;padding:30px 0">
+    AI不是让强者更强，<br>而是让弱者有机会追上
+  </div>
+  <p style="text-align:center;font-size:1.2em;margin-top:20px" class="anim-up">
+    因为AI把优质教育资源，以极低的成本，<br>送到了每一个有网络的地方
+  </p>
+  <div class="slide-num">18 / 28</div>
+</div>
+
+<!-- ========== 幻灯片19：三师共育 ========== -->
+<div class="slide bg-light" id="slide-19">
+  <div class="scan-line"></div>
+  <h2 style="color:#0f3460" class="anim-up">"三师共育"模式</h2>
+  <div style="text-align:center;margin:20px 0;font-size:1.4em" class="highlight anim-up">
+    传统课堂：1个老师 → 50个学生<br><br>
+    <span style="font-size:0.7em;color:#999">↓ 变成 ↓</span><br><br>
+    <span style="color:#e94560;font-size:1.1em">AI老师 + 同伴互助 + 真人教师</span>
+  </div>
+  <table class="white-table anim-up">
+    <tr><th>传统困境</th><th>AI如何解决</th></tr>
+    <tr><td>没有优质师资</td><td>AI提供顶级教学资源</td></tr>
+    <tr><td>学生水平差异大</td><td>AI个性化推题，因材施教</td></tr>
+    <tr><td>错题没人讲</td><td>AI随时答疑，同伴互助</td></tr>
+    <tr><td>学困生不敢问老师</td><td>AI没有"情绪"，学生敢问</td></tr>
+  </table>
+  <a href="https://www.bilibili.com/video/BV1vj1XBHEhd" target="_blank" class="anim-up" style="display:inline-block;margin-top:15px;padding:8px 20px;background:#0f3460;border-radius:6px;color:#fff;font-size:0.85em;text-decoration:none">▶ 观看小鹿爱学AI智慧课堂实录</a>
+  <div class="slide-num">19 / 28</div>
+</div>
+
+<!-- ========== 幻灯片20：三段四化 ========== -->
+<div class="slide bg-light" id="slide-20">
+  <h2 style="color:#0f3460" class="anim-up">"三段四化"智慧课堂教学模式</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">📋 课前（前置学习）</p>
+    <p>教师设计前置学习单推送给学生；学生在平板完成自学质疑；AI收集学情数据。</p>
+  </div>
+  <div class="card-light anim-up">
+    <p class="card-title">📋 课中（精准教学）</p>
+    <p>不再"从头讲到尾"；重点讲学生不懂的、容易错的；分层教学。</p>
+  </div>
+  <div class="card-light anim-up">
+    <p class="card-title">📋 课后（个性化巩固）</p>
+    <p>AI根据每个学生情况推送不同练习题；错题自动整理；教师个别辅导。</p>
+  </div>
+  <div class="slide-num">20 / 28</div>
+</div>
+
+<!-- ========== 幻灯片21：第四章标题 ========== -->
+<div class="slide bg-aurora2" id="slide-21">
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3" style="background:var(--neon-gold)"></div>
+  <div class="chapter-num anim-up">CHAPTER FOUR</div>
+  <h1 class="glow-text anim-up">课堂教学怎么改？</h1>
+  <div class="chapter-line anim-up"></div>
+  <p class="subtitle anim-up">具体可操作的方法</p>
+  <div class="slide-num">21 / 28</div>
+</div>
+
+<!-- ========== 幻灯片22：方法一 ========== -->
+<div class="slide bg-light" id="slide-22">
+  <div class="scan-line"></div>
+  <h2 style="color:#0f3460" class="anim-up">方法一：培养学生精准提问能力</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">🛠️ 每节课加入"好问题时间"（最后5分钟）</p>
+    <p>规则：不接受"是不是""对不对"类问题；鼓励学生提出：为什么？如果不这样会怎样？</p>
+  </div>
+  <div class="card-light anim-up" style="margin-top:20px">
+    <p class="card-title">🛠️ 用AI训练提问能力</p>
+    <p>让学生用AI回答问题，然后评价：AI的回答好不好？如果不好，是哪个问题没问清楚？</p>
+  </div>
+  <div class="slide-num">22 / 28</div>
+</div>
+
+<!-- ========== 幻灯片23：方法二 ========== -->
+<div class="slide bg-light" id="slide-23">
+  <h2 style="color:#0f3460" class="anim-up">方法二：麻省理工学霸AI学习法</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">🧠 核心：三问法（先搭框架，再填细节）</p>
+    <p><strong>第一问：</strong>这个领域专家共有的5个核心思维模型是什么？</p>
+    <p><strong>第二问：</strong>专家们存在根本性分歧的3个地方是什么？</p>
+    <p><strong>第三问：</strong>能区分"深度理解者"和"单纯记忆者"的10个问题是什么？</p>
+    <a href="https://www.bilibili.com/video/BV1PMQnBFE9K" target="_blank" style="display:inline-block;margin-top:12px;padding:6px 16px;background:#0f3460;border-radius:6px;color:#fff;font-size:0.85em;text-decoration:none">▶ 观看视频详解</a>
+  </div>
+  <div class="discussion anim-up" style="background:#f0f0f0;color:#333;margin-top:20px;border-left-color:#0f3460">
+    <p>💡 课堂实操：不再"先讲定义再讲例题"，而是"先让学生用AI搭建知识框架，再来精细化理解"。</p>
+  </div>
+  <div class="slide-num">23 / 28</div>
+</div>
+
+<!-- ========== 幻灯片24：方法三 ========== -->
+<div class="slide bg-light" id="slide-24">
+  <div class="scan-line"></div>
+  <h2 style="color:#0f3460" class="anim-up">方法三：给孩子选择权，激发内驱力</h2>
+  <div class="card-light anim-up">
+    <p class="card-title">🗝️ 核心：选择权 = 内驱力的源头</p>
+    <p><strong>学习节奏</strong>让学生选；<strong>作业形式</strong>可以选；<strong>犯错的空间</strong>要留。</p>
+  </div>
+  <div class="card-light anim-up" style="margin-top:20px;background:#fff8e1;border-left:5px solid #f57c00">
+    <p style="color:#e94560;font-weight:bold">⚠️ 关键：选择权不等于放任自流</p>
+    <p style="color:#333">是在教师设计的框架内，给学生自主的空间。</p>
+    <a href="https://todo.yuekegu.com/index.php/2026/06/30/%e6%8f%90%e5%8d%87%e5%ad%a9%e5%ad%90%e5%86%85%e9%a9%b1%e5%8a%9b-%e5%a4%9a%e7%bb%99%e5%ad%a9%e5%ad%90%e4%ba%ba%e4%ba%9b%e9%80%89%e6%8b%a9%e6%9d%83/" target="_blank" style="display:inline-block;margin-top:10px;padding:6px 16px;background:#f57c00;border-radius:6px;color:#fff;font-size:0.85em;text-decoration:none">📖 阅读原文详解</a>
+  </div>
+  <div class="slide-num">24 / 28</div>
+</div>
+
+<!-- ========== 幻灯片25：课堂时间分配 ========== -->
+<div class="slide bg-light" id="slide-25">
+  <h2 style="color:#0f3460" class="anim-up">重新设计课堂时间分配</h2>
+  <div class="two-col">
+    <div class="card-light anim-up" style="opacity:0.6">
+      <p class="card-title" style="color:#999">传统课堂（45分钟）</p>
+      <p>老师讲 35分钟<br>+<br>学生练 10分钟</p>
+    </div>
+    <div class="card-light anim-up" style="border-left:5px solid #e94560">
+      <p class="card-title">AI时代课堂（45分钟）</p>
+      <p>前置自学（课前完成）<br>↓<br><span class="highlight">精讲重点 15分钟</span><br>↓<br><span class="highlight">能力训练 20分钟</span><br>↓<br><span class="highlight">总结反思 10分钟</span></p>
+    </div>
+  </div>
+  <div class="slide-num">25 / 28</div>
+</div>
+
+<!-- ========== 幻灯片26：行动清单 ========== -->
+<div class="slide bg-aurora2" id="slide-26">
+  <div class="glow-orb orb-1"></div>
+  <h2 class="anim-up">📋 AI时代教师行动清单</h2>
+  <div style="font-size:1.2em;line-height:2.8" class="anim-up">
+    <p>☑ 今天回去，就试用一次AI工具辅助教学</p>
+    <p>☑ 这学期，每节课留3分钟"好问题时间"</p>
+    <p>☑ 下个月，尝试一次"前置学习+课堂精讲"的翻转课堂</p>
+    <p>☑ 本学期，找3个学生深度聊一次"你的学习目标"</p>
+    <p>☑ 今年，读一本关于AI和教育的好书</p>
+  </div>
+  <p style="margin-top:40px;font-size:1.2em;text-align:center;color:rgba(255,255,255,0.5)" class="anim-up">
+    改变不需要一步到位。从一小步开始，就是进步。
+  </p>
+  <div class="slide-num">26 / 28</div>
+</div>
+
+<!-- ========== 幻灯片27：结语 ========== -->
+<div class="slide bg-finale" id="slide-27">
+  <div class="glow-orb orb-1" style="background:#ff6b6b"></div>
+  <div class="glow-orb orb-2" style="background:var(--neon-gold)"></div>
+  <div class="glow-orb orb-3" style="background:var(--neon-purple)"></div>
+  <div class="scan-line"></div>
+  <h2 class="anim-up">💝 结语：做AI时代有温度的教育</h2>
+  <div style="font-size:1.3em;line-height:2.2;margin-top:40px" class="anim-up">
+    <p>AI可以让知识传递更高效，</p>
+    <p>但<span class="highlight">教育的温度，只能来自人</span>。</p>
+    <br>
+    <p>替代不了你在学生迷茫时的一句话，</p>
+    <p>替代不了你在学生犯错时的一个眼神，</p>
+    <p>替代不了你在学生成功时的一份真心喜悦。</p>
+  </div>
+  <div style="margin-top:50px;text-align:center;font-size:1.5em" class="highlight anim-up pulse-glow" style="display:inline-block;padding:20px 40px;border-radius:12px">
+    让我们一起，做AI时代最有温度的教育。
+  </div>
+  <div class="slide-num">27 / 28</div>
+</div>
+
+<!-- ========== 幻灯片28：致谢 ========== -->
+<div class="slide bg-finale" id="slide-28">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="scan-line"></div>
+  <h1 class="glow-text anim-up" style="text-align:center;font-size:4em">谢谢大家！</h1>
+  <div style="margin-top:60px;text-align:center;font-size:1.2em;line-height:2.5" class="anim-up">
+    <p>📚 更多资源：Todo工作室</p>
+    <p style="color:rgba(255,255,255,0.4)">https://todo.yuekegu.com</p>
+    <br>
+    <p>📹 推荐视频：</p>
+    <a href="https://www.bilibili.com/video/BV1vj1XBHEhd" target="_blank" style="color:#00d4ff;text-decoration:none;font-size:0.95em">阜南亲情学校AI智慧课堂实录 →</a>
+    <br>
+    <a href="https://www.bilibili.com/video/BV125Q4BEEq5" target="_blank" style="color:#00d4ff;text-decoration:none;font-size:0.95em">尹烨：全球大厂招聘高中生 →</a>
+    <br>
+    <a href="https://www.bilibili.com/video/BV1Q1DXBFEC4" target="_blank" style="color:#00d4ff;text-decoration:none;font-size:0.95em">黄仁勋：AI时代6大稀缺能力 →</a>
+    <br>
+    <a href="https://www.bilibili.com/video/BV1PMQnBFE9K" target="_blank" style="color:#00d4ff;text-decoration:none;font-size:0.95em">麻省理工学霸AI学习法 →</a>
+    <br>
+    <a href="https://www.bilibili.com/video/BV11SGU6jEWc" target="_blank" style="color:#00d4ff;text-decoration:none;font-size:0.95em">物理满分学霸：吃透模型远比刷题有用 →</a>
+  </div>
+  <div class="slide-num">28 / 28</div>
+</div>
+
+</div>
+
+<!-- 导航按钮 -->
+<div class="nav">
+  <button onclick="prevSlide()"><span>⬅ 上一页</span></button>
+  <button onclick="nextSlide()"><span>下一页 ➡</span></button>
+</div>
+
+<!-- 键盘提示 -->
+<div class="kbd-hint">← → 翻页 &nbsp;|&nbsp; 空格下一页</div>
+
+<script>
+// ===== 粒子系统 =====
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let W, H;
+
+function resizeCanvas() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const colors = ['#e94560', '#00d4ff', '#a855f7', '#ffd700'];
+
+class Particle {
+  constructor() { this.reset(); this.y = Math.random() * H; }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = H + 10;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speedY = Math.random() * 0.8 + 0.2;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.opacity = Math.random() * 0.5 + 0.1;
+    this.twinkle = Math.random() * 0.02;
+    this.twinkleDir = 1;
+  }
+  update() {
+    this.y -= this.speedY;
+    this.x += this.speedX;
+    this.opacity += this.twinkle * this.twinkleDir;
+    if (this.opacity > 0.6 || this.opacity < 0.05) this.twinkleDir *= -1;
+    if (this.y < -10) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.opacity;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particles = [];
+  const count = Math.min(80, Math.floor(W / 20));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+initParticles();
+
+function animateParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  // 连线
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = particles[i].color;
+        ctx.globalAlpha = (1 - dist / 120) * 0.08;
+        ctx.lineWidth = 0.5;
+        ctx.shadowBlur = 0;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+window.addEventListener('resize', initParticles);
+
+// ===== 幻灯片控制 =====
+let current = 1;
+const total = 28;
+
+function updateProgress() {
+  document.getElementById('progress').style.width = (current / total * 100) + '%';
+}
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('slide-' + n);
+  if (target) {
+    target.classList.add('active');
+    // 重新触发动画
+    target.querySelectorAll('.anim-up').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // 强制重排
+      el.style.animation = '';
+    });
+  }
+  current = n;
+  updateProgress();
+}
+
+function nextSlide() { if (current < total) showSlide(current + 1); }
+function prevSlide() { if (current > 1) showSlide(current - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key === 'Home') showSlide(1);
+  if (e.key === 'End') showSlide(total);
+  // 数字键跳转
+  const num = parseInt(e.key);
+  if (num >= 1 && num <= 9 && current <= 20) {
+    // 快速跳转前9页
+  }
+});
+
+// 触摸滑动支持
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) { dx > 0 ? prevSlide() : nextSlide(); }
+});
+
+updateProgress();
+</script>
+</body>
+</html>

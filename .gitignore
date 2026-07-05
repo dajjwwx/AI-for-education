@@ -1,0 +1,7 @@
+node_modules/
+quiz-server/data.json
+quiz-server/node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env

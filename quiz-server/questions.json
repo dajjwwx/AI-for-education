@@ -1,0 +1,496 @@
+{
+  "quizzes": [
+    {
+      "id": 1,
+      "title": "第一部分：AI来了，教育不能装睡",
+      "section": "开场",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "AI最擅长替代以下哪类工作？",
+          "options": [
+            {"label": "A", "text": "创意设计"},
+            {"label": "B", "text": "标准化重复劳动"},
+            {"label": "C", "text": "情感陪伴"},
+            {"label": "D", "text": "价值判断"}
+          ],
+          "correct": "B",
+          "explanation": "AI擅长处理标准化、重复性的信息劳动，如知识检索、批量批改等。而创意设计、情感陪伴、价值判断都需要人类独有的能力。",
+          "errorAnalysis": "选A或C的可能是混淆了AI'能辅助'和'能替代'的边界。AI可以辅助创意和模拟情感，但无法真正替代。",
+          "recommendation": "回顾讲座中'AI能做什么/不能做什么'对比表。"
+        },
+        {
+          "id": 2,
+          "type": "multiple",
+          "question": "以下哪些是AI目前无法替代的教师价值？（多选）",
+          "options": [
+            {"label": "A", "text": "价值观引导与人格塑造"},
+            {"label": "B", "text": "知识检索与记忆"},
+            {"label": "C", "text": "情感陪伴与心理支持"},
+            {"label": "D", "text": "标准化题目批改"}
+          ],
+          "correct": ["A", "C"],
+          "explanation": "价值观引导、人格塑造、情感陪伴和心理支持都需要真实的人类温度和情感连接，AI无法替代。而知识检索和标准化批改正是AI擅长的。",
+          "errorAnalysis": "选了B或D的可能是对AI能力认知不足——这两项恰恰是AI最擅长替代的领域。",
+          "recommendation": "重看开场视频尹烨的演讲，思考'能力优先'的含义。B站：BV125Q4BEEq5"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "全球大厂开始招聘高中生，这说明企业更看重什么？",
+          "options": [
+            {"label": "A", "text": "学校名气"},
+            {"label": "B", "text": "学历层次"},
+            {"label": "C", "text": "个人能力与潜力"},
+            {"label": "D", "text": "家庭背景"}
+          ],
+          "correct": "C",
+          "explanation": "企业不再把'本科文凭'作为简历第一道筛选线，而是更看重能力和潜力。这意味着人才培养目标需要从'学历导向'转向'能力导向'。",
+          "errorAnalysis": "选A或B的还停留在传统学历至上的思维模式中，没有意识到AI时代企业用人标准的转变。",
+          "recommendation": "回顾讲座'核心问题抛出'部分，思考AI时代到底要培养什么样的人。"
+        },
+        {
+          "id": 4,
+          "type": "single",
+          "question": "以下哪个说法最准确？",
+          "options": [
+            {"label": "A", "text": "AI可以完全替代教师"},
+            {"label": "B", "text": "AI没有任何教育价值"},
+            {"label": "C", "text": "AI擅长处理信息，但不擅长意义构建和情感连接"},
+            {"label": "D", "text": "AI时代不再需要学习知识"}
+          ],
+          "correct": "C",
+          "explanation": "AI擅长'处理信息'，但人不只需要'处理信息'——人需要意义、需要情感、需要创造力。这正是教师不可替代的价值所在。",
+          "errorAnalysis": "选A的是过度恐慌，选B的是盲目排斥，选D的是错误理解了AI时代的学习需求。",
+          "recommendation": "理解AI的能力边界，是有效使用AI赋能教学的前提。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "本场讲座的核心问题是？",
+          "options": [
+            {"label": "A", "text": "如何使用AI工具"},
+            {"label": "B", "text": "AI时代，我们到底要培养什么样的人"},
+            {"label": "C", "text": "如何提高高考分数"},
+            {"label": "D", "text": "AI技术原理是什么"}
+          ],
+          "correct": "B",
+          "explanation": "整场讲座围绕'AI时代来了，我们到底要培养什么样的人？'这个核心问题展开，从人才培养目标、教师角色定位、教学方法变革三个维度回答。",
+          "errorAnalysis": "选A的把技术工具当成了核心，选C的过于功利化，选D的偏离了教育主题。",
+          "recommendation": "带着这个问题，继续学习后续章节的内容。"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "第二部分：AI时代稀缺的六大能力",
+      "section": "六大能力",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "'精准提问能力'为什么在AI时代尤为重要？",
+          "options": [
+            {"label": "A", "text": "因为AI能回答所有问题"},
+            {"label": "B", "text": "因为能提出好问题的人比能回答标准答案的人更有价值"},
+            {"label": "C", "text": "因为提问能力是天生的"},
+            {"label": "D", "text": "因为考试要考提问"}
+          ],
+          "correct": "B",
+          "explanation": "AI只能回答问题，无法自主定义真正有价值的问题。未来，能提出好问题的人，远比能回答标准答案的人值钱。",
+          "errorAnalysis": "选A的误解了AI的能力——AI能回答问题，但不代表能回答'所有'问题，更不能替代提问。",
+          "recommendation": "尝试在课堂上每节课留5分钟'好问题时间'，训练学生提问能力。"
+        },
+        {
+          "id": 2,
+          "type": "single",
+          "question": "以下哪项属于'原创创造能力'的培养方法？",
+          "options": [
+            {"label": "A", "text": "增加标准答案训练"},
+            {"label": "B", "text": "减少开放题比重"},
+            {"label": "C", "text": "鼓励异想天开，不直接否定错误答案"},
+            {"label": "D", "text": "多做模拟题"}
+          ],
+          "correct": "C",
+          "explanation": "AI依靠过往数据做概率生成，只能复刻、拼接已有内容。人类独有的灵感、从零到一的突破性创新，机器无法复刻。鼓励异想天开是培养原创力的有效方法。",
+          "errorAnalysis": "选A或D的还在用'刷题'思维培养创造力，方向完全错误。",
+          "recommendation": "回顾讲座'能力二：原创创造能力'部分的课堂实操建议。"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "AI在以下哪个能力领域是'盲区'？",
+          "options": [
+            {"label": "A", "text": "数据分析"},
+            {"label": "B", "text": "审美与品位判断力"},
+            {"label": "C", "text": "知识检索"},
+            {"label": "D", "text": "翻译"}
+          ],
+          "correct": "B",
+          "explanation": "AI可以批量产出内容，但没有真实主观感受，分不清什么是'高级'、什么是'有温度'。审美是一种综合判断能力，是AI的盲区。",
+          "errorAnalysis": "选A、C或D的混淆了AI的信息处理能力和审美判断能力。",
+          "recommendation": "在教学中融入审美教育——数学的简洁之美、物理的对称之美、文学的意境之美。"
+        },
+        {
+          "id": 4,
+          "type": "single",
+          "question": "对于偏远地区学生，正确的'两手准备'是指？",
+          "options": [
+            {"label": "A", "text": "放弃高考，专攻AI"},
+            {"label": "B", "text": "只抓高考，不管能力"},
+            {"label": "C", "text": "高考+学习能力提升，两手都要硬"},
+            {"label": "D", "text": "只培养能力，不学知识"}
+          ],
+          "correct": "C",
+          "explanation": "对于偏远地区学生，高考依然是改变命运最重要的通道，不能放弃。但只有高考分数是不够的——进了大学后'后劲不足'的根源就是只会刷题、不会自主学习。两手准备：既考得好，也走得更远。",
+          "errorAnalysis": "选A或D的走极端，选B的只看眼前。三种错误都源于把'高考'和'能力'对立起来了。",
+          "recommendation": "回顾讲座'偏远地区学生的两手准备'部分，理解'知识是载体，能力是目标'。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "以下哪项最能体现'从知识容器到能力提升'的转变？",
+          "options": [
+            {"label": "A", "text": "从刷题速度快到原创创造能力强"},
+            {"label": "B", "text": "从知识记忆到精准提问"},
+            {"label": "C", "text": "以上都是"},
+            {"label": "D", "text": "以上都不是"}
+          ],
+          "correct": "C",
+          "explanation": "传统培养目标强调知识记忆、刷题速度、标准答案，而AI时代需要精准提问、原创创造、审美判断等能力。A和B都是这一转变的体现。",
+          "errorAnalysis": "只选A或只选B的是理解不全面，六大能力的转变是一个整体。",
+          "recommendation": "回顾讲座中'传统培养目标 vs AI时代培养目标'的对比图。"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "第三部分：教师角色再定位",
+      "section": "教师角色",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "'教书交给AI，教师只育人'这个说法的问题在于？",
+          "options": [
+            {"label": "A", "text": "完全正确"},
+            {"label": "B", "text": "教书和育人不能分开"},
+            {"label": "C", "text": "教师不需要育人"},
+            {"label": "D", "text": "AI不能用于教学"}
+          ],
+          "correct": "B",
+          "explanation": "这句话对了一半（教师确实应更关注育人），也错了一半（教书和育人从来不能分开）。正确理解是'用AI来教书，教师专注于更高层次的育人+'。",
+          "errorAnalysis": "选A的过于简化了教育的复杂性，选C或D的走了极端。",
+          "recommendation": "回顾讲座'澄清误区'部分，理解教师主导+学生主体的辩证统一。"
+        },
+        {
+          "id": 2,
+          "type": "single",
+          "question": "AI时代课堂中'教师主导+学生主体'的原则应该？",
+          "options": [
+            {"label": "A", "text": "取消教师主导"},
+            {"label": "B", "text": "取消学生主体"},
+            {"label": "C", "text": "两者都不能变"},
+            {"label": "D", "text": "全部交给AI"}
+          ],
+          "correct": "C",
+          "explanation": "教师主导不能变（价值观需要引导、课堂需要设计、学困生需要陪伴），学生主体也不能变（学习是学生自己的事、内驱力来自自主、AI是工具而用工具的人是学生）。",
+          "errorAnalysis": "选A或B的都是割裂了教与学的关系，选D的是放弃了教师的责任。",
+          "recommendation": "在教学中始终坚持教师主导与学生主体的统一，AI是赋能工具而非替代者。"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "AI时代教师的首要新身份是？",
+          "options": [
+            {"label": "A", "text": "知识传授者"},
+            {"label": "B", "text": "学习设计师"},
+            {"label": "C", "text": "纪律管理者"},
+            {"label": "D", "text": "作业批改者"}
+          ],
+          "correct": "B",
+          "explanation": "AI时代教师不是'知识的中转站'，而是'学习的建筑师'。知识传递可以借力AI，但学习的设计必须由教师来完成。四种新身份：学习设计师、学情诊断师、内驱力激发师、价值观引导师。",
+          "errorAnalysis": "选A的还停留在传统角色认知中，选C或D的把教师矮化了。",
+          "recommendation": "回顾讲座'教师角色的新定位：四种身份'部分。"
+        },
+        {
+          "id": 4,
+          "type": "single",
+          "question": "阜南亲情学校的案例中，教师的角色从'讲课机器'转变为了什么？",
+          "options": [
+            {"label": "A", "text": "AI操作员"},
+            {"label": "B", "text": "学习设计师"},
+            {"label": "C", "text": "旁观者"},
+            {"label": "D", "text": "后勤人员"}
+          ],
+          "correct": "B",
+          "explanation": "阜南亲情学校使用'小鹿爱学'AI平台后，教师从'满堂灌的讲课机器'转变为'走到学生中间的学习设计师'。'把教书交给科技，把育人留给自己——但教书的质量，反而更高了。'",
+          "errorAnalysis": "选A的把教师降格为技术操作员，选C或D的完全偏离了案例核心。",
+          "recommendation": "观看B站视频 BV1vj1XBHEhd，深入了解阜南亲情学校的实践。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "以下哪项不是AI时代教师的四种新身份之一？",
+          "options": [
+            {"label": "A", "text": "学习设计师"},
+            {"label": "B", "text": "学情诊断师"},
+            {"label": "C", "text": "内驱力激发师"},
+            {"label": "D", "text": "知识背诵监督师"}
+          ],
+          "correct": "D",
+          "explanation": "四种新身份是：学习设计师、学情诊断师、内驱力激发师、价值观引导师。'知识背诵监督师'恰恰是AI时代应该被淘汰的旧角色。",
+          "errorAnalysis": "选A、B或C的说明对四种身份记忆不牢。",
+          "recommendation": "记住AI时代教师四身份：设计→诊断→激发→引导。"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "第四部分：AI赋能教学——偏远地区的弯道超车",
+      "section": "AI赋能",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "AI对偏远地区学校的最大价值是？",
+          "options": [
+            {"label": "A", "text": "让强者更强"},
+            {"label": "B", "text": "让弱者有机会追上，以极低成本获取优质教育资源"},
+            {"label": "C", "text": "完全替代教师"},
+            {"label": "D", "text": "没有价值"}
+          ],
+          "correct": "B",
+          "explanation": "AI不是让强者更强，而是让弱者有机会追上——因为AI把优质教育资源，以极低的成本，送到了每一个有网络的地方。这是偏远地区弯道超车的机会。",
+          "errorAnalysis": "选A的没有理解AI对教育公平的积极意义，选C或D的走了极端。",
+          "recommendation": "回顾讲座'现实困境'部分，理解AI对教育公平的价值。"
+        },
+        {
+          "id": 2,
+          "type": "multiple",
+          "question": "'三师共育'模式中的'三师'是指？（多选）",
+          "options": [
+            {"label": "A", "text": "AI老师（24小时在线，个性化辅导）"},
+            {"label": "B", "text": "同伴互助（学生教学生）"},
+            {"label": "C", "text": "真人教师（设计、引导、陪伴）"},
+            {"label": "D", "text": "家长辅导"}
+          ],
+          "correct": ["A", "B", "C"],
+          "explanation": "三师共育 = AI老师 + 同伴互助 + 真人教师。传统课堂是1个真人老师面对50个学生，三师共育让AI承担个性化辅导，同伴互相帮助，真人教师聚焦设计和陪伴。",
+          "errorAnalysis": "选了D的——家长辅导是家庭教育的一部分，不属于'三师共育'的课堂模式。",
+          "recommendation": "回顾讲座'三师共育模式'部分，理解三种角色的分工。"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "'三段四化'中的'三段'是指？",
+          "options": [
+            {"label": "A", "text": "预习-听课-复习"},
+            {"label": "B", "text": "课前-课中-课后"},
+            {"label": "C", "text": "导入-展开-总结"},
+            {"label": "D", "text": "基础-提高-拓展"}
+          ],
+          "correct": "B",
+          "explanation": "三段 = 课前（前置学习，AI收集学情）+ 课中（精准教学，只讲学生不懂的）+ 课后（个性化巩固，AI推题）。核心是用AI让教师'看得见每个学生的状态'。",
+          "errorAnalysis": "选A的是传统学习流程，选C的是课堂教学环节，选D的是分层教学，都不是'三段四化'的三段。",
+          "recommendation": "回顾讲座'三段四化智慧课堂教学模式'部分。"
+        },
+        {
+          "id": 4,
+          "type": "multiple",
+          "question": "'三段四化'中的'四化'包括以下哪些？（多选）",
+          "options": [
+            {"label": "A", "text": "个性化"},
+            {"label": "B", "text": "数据化"},
+            {"label": "C", "text": "智能化"},
+            {"label": "D", "text": "精准化"}
+          ],
+          "correct": ["A", "B", "C", "D"],
+          "explanation": "四化 = 个性化（因材施教）+ 数据化（学情可视）+ 智能化（AI辅助）+ 精准化（靶向教学）。四个维度共同构成AI赋能课堂的完整框架。",
+          "errorAnalysis": "少选的说明对'四化'理解不全面，四个维度缺一不可。",
+          "recommendation": "在教学中尝试实践'四化'中的一个维度作为起步。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "AI在'三师共育'模式中，以下哪个传统困境是它直接解决的？",
+          "options": [
+            {"label": "A", "text": "学校硬件设施老旧"},
+            {"label": "B", "text": "学困生不敢问老师，AI没有'情绪'学生敢问"},
+            {"label": "C", "text": "校园面积不够大"},
+            {"label": "D", "text": "食堂饭菜不好吃"}
+          ],
+          "correct": "B",
+          "explanation": "AI没有'情绪'，学生不用担心被批评，所以敢于提问。这是AI独特的优势——它消除了师生之间的心理障碍，让学困生也能得到及时帮助。",
+          "errorAnalysis": "选A、C或D的与AI教学功能无关，是物理设施问题。",
+          "recommendation": "回顾讲座'三师共育在偏远地区的特殊价值'对比表。"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "第五部分：课堂教学怎么改——具体可操作的方法",
+      "section": "教学方法",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "'好问题时间'的规则是什么？",
+          "options": [
+            {"label": "A", "text": "接受所有问题"},
+            {"label": "B", "text": "不接受'是不是''对不对'这类低质量问题"},
+            {"label": "C", "text": "只接受课本上的问题"},
+            {"label": "D", "text": "不让学生提问"}
+          ],
+          "correct": "B",
+          "explanation": "好问题时间鼓励学生提出'为什么''如果不这样会怎样''这个和那个有什么区别'等深度问题，不接受'是不是''对不对'这类不需要思考的问题。",
+          "errorAnalysis": "选A的没有区分问题质量，选C的限定了思考范围，选D的完全错误。",
+          "recommendation": "下节课尝试最后留5分钟做'好问题时间'。"
+        },
+        {
+          "id": 2,
+          "type": "single",
+          "question": "麻省理工学霸AI学习法的核心是？",
+          "options": [
+            {"label": "A", "text": "死记硬背"},
+            {"label": "B", "text": "三问法（先搭框架，再填细节）"},
+            {"label": "C", "text": "题海战术"},
+            {"label": "D", "text": "看视频学习"}
+          ],
+          "correct": "B",
+          "explanation": "三问法：第一问（5个核心思维模型）→第二问（3个专家分歧点）→第三问（10个区分深度理解与记忆的问题）。先搭框架，再填细节，用AI辅助搭建知识骨架。",
+          "errorAnalysis": "选A或C的是传统低效方法，选D的过于被动。",
+          "recommendation": "观看B站视频 BV1PMQnBFE9K，学习三问法的完整操作。"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "激发学生内驱力的关键是？",
+          "options": [
+            {"label": "A", "text": "强制学习"},
+            {"label": "B", "text": "给孩子选择权"},
+            {"label": "C", "text": "增加作业量"},
+            {"label": "D", "text": "提高分数要求"}
+          ],
+          "correct": "B",
+          "explanation": "选择权 = 内驱力的源头。让学生选择学习节奏、作业形式，并留出犯错的空间。关键：选择权不等于放任自流，是在教师设计的框架内给学生自主空间。",
+          "errorAnalysis": "选A、C或D的都是外部压力驱动，而非内驱力激发，方向完全相反。",
+          "recommendation": "回顾讲座'方法三：给孩子选择权'的三个实操建议。"
+        },
+        {
+          "id": 4,
+          "type": "single",
+          "question": "AI时代课堂的时间分配建议是？",
+          "options": [
+            {"label": "A", "text": "老师讲35分钟+学生练10分钟"},
+            {"label": "B", "text": "精讲重点15分钟+能力训练20分钟+总结反思10分钟"},
+            {"label": "C", "text": "全部由AI讲解"},
+            {"label": "D", "text": "学生自学45分钟"}
+          ],
+          "correct": "B",
+          "explanation": "把'知识传递'放到课前（用AI辅助），课堂时间用在最有价值的地方——精讲重点15分钟+能力训练20分钟+总结反思10分钟。核心是从'讲知识'到'练能力'。",
+          "errorAnalysis": "选A的是传统满堂灌模式，选C或D的放弃了教师主导作用。",
+          "recommendation": "尝试用'前置学习+课堂精讲'的翻转课堂模式重新设计一节课。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "用AI训练学生提问能力的具体方法是？",
+          "options": [
+            {"label": "A", "text": "让学生用AI回答问题，然后评价AI回答好不好"},
+            {"label": "B", "text": "禁止学生使用AI"},
+            {"label": "C", "text": "让AI替学生提问"},
+            {"label": "D", "text": "让AI替学生回答所有问题"}
+          ],
+          "correct": "A",
+          "explanation": "让学生用AI回答问题→评价AI的回答→如果不好，是哪个问题没问清楚→反过来训练提问能力。这是一个闭环训练法，将AI从'答案机器'变成了'提问训练器'。",
+          "errorAnalysis": "选B的是因噎废食，选C或D的把AI用反了。",
+          "recommendation": "在课堂上设计一次'评价AI回答'的活动。"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "第六部分：结语——做AI时代有温度的教育",
+      "section": "结语",
+      "questions": [
+        {
+          "id": 1,
+          "type": "single",
+          "question": "AI时代教师行动清单中，'今天回去就可以做的事'是？",
+          "options": [
+            {"label": "A", "text": "试用一次AI工具辅助教学"},
+            {"label": "B", "text": "改造整个课程体系"},
+            {"label": "C", "text": "购买所有AI设备"},
+            {"label": "D", "text": "转行不做教师"}
+          ],
+          "correct": "A",
+          "explanation": "行动清单：今天试用AI工具→每节课留3分钟好问题时间→尝试翻转课堂→找3个学生聊学习目标→读一本AI教育好书。改变不需要一步到位，从一小步开始就是进步。",
+          "errorAnalysis": "选B的不切实际，选C的过于物质化，选D的完全错误。",
+          "recommendation": "今天就下载一个AI工具（如DeepSeek），尝试用它辅助备课。"
+        },
+        {
+          "id": 2,
+          "type": "single",
+          "question": "'AI可以让知识传递更高效，但教育的温度，只能来自人。'这句话的核心意思是？",
+          "options": [
+            {"label": "A", "text": "AI完全无用"},
+            {"label": "B", "text": "AI是工具，人的温度不可替代"},
+            {"label": "C", "text": "不需要AI"},
+            {"label": "D", "text": "只需要技术"}
+          ],
+          "correct": "B",
+          "explanation": "AI替代不了你在学生迷茫时的一句话、犯错时的一个眼神、成功时的一份真心喜悦。AI让知识传递更高效，但教育的温度只能来自人。",
+          "errorAnalysis": "选A或C的是排斥AI，选D的是技术至上，都偏离了'人机协作'的核心。",
+          "recommendation": "把这句话写在教案本首页，时刻提醒自己教育的本质。"
+        },
+        {
+          "id": 3,
+          "type": "single",
+          "question": "对于偏远地区学生，以下哪个态度最可取？",
+          "options": [
+            {"label": "A", "text": "放弃努力，听天由命"},
+            {"label": "B", "text": "做好两手准备：高考+学习能力提升"},
+            {"label": "C", "text": "只抓分数不管能力"},
+            {"label": "D", "text": "只培养能力不管分数"}
+          ],
+          "correct": "B",
+          "explanation": "偏远地区学生没有大城市的资源，但AI提供了弯道超车的机会。两手准备：用AI让刷题更高效（高考），同时刻意培养六大能力（学习能力），让学生'既考得好，也走得更远'。",
+          "errorAnalysis": "选A的是消极放弃，选C或D的都是走极端。",
+          "recommendation": "回顾讲座全程，制定适合自己班级的'两手准备'行动计划。"
+        },
+        {
+          "id": 4,
+          "type": "single",
+          "question": "本场讲座的核心结论是？",
+          "options": [
+            {"label": "A", "text": "AI将取代教师"},
+            {"label": "B", "text": "教师应拒绝AI"},
+            {"label": "C", "text": "用AI赋能教学，做有温度的教育，教师主导+学生主体不能变"},
+            {"label": "D", "text": "只需关注高考成绩"}
+          ],
+          "correct": "C",
+          "explanation": "核心结论：AI时代来了，不是要放弃教师的主导地位，也不是把一切交给AI，而是用AI赋能教学，让教师成为学习设计师，做有温度的教育。教师主导+学生主体不能变。",
+          "errorAnalysis": "选A、B或D的都偏离了讲座的核心立场。",
+          "recommendation": "带着今天的收获，从行动清单的第一步开始改变。"
+        },
+        {
+          "id": 5,
+          "type": "single",
+          "question": "以下哪项最能体现'从讲知识到练能力'的转变？",
+          "options": [
+            {"label": "A", "text": "把知识传递放到课前，课堂时间用于能力训练"},
+            {"label": "B", "text": "课堂全部用于讲授知识点"},
+            {"label": "C", "text": "取消所有知识教学"},
+            {"label": "D", "text": "让AI讲全部知识"}
+          ],
+          "correct": "A",
+          "explanation": "不是不讲知识，而是把'知识传递'放到课前（用AI辅助），把宝贵的课堂时间用在最有价值的地方——能力训练。知识是载体，能力是目标。",
+          "errorAnalysis": "选B的没有转变，选C或D的走极端。",
+          "recommendation": "设计一节'前置学习+课堂能力训练'的课，下学期实践。"
+        }
+      ]
+    }
+  ]
+}
