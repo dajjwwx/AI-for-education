@@ -333,20 +333,20 @@
       "title": "第五部分：课堂教学怎么改——具体可操作的方法",
       "section": "教学方法",
       "questions": [
-        {
-          "id": 1,
-          "type": "single",
-          "question": "'好问题时间'的规则是什么？",
-          "options": [
-            {"label": "A", "text": "接受所有问题"},
-            {"label": "B", "text": "不接受'是不是''对不对'这类低质量问题"},
-            {"label": "C", "text": "只接受课本上的问题"},
-            {"label": "D", "text": "不让学生提问"}
-          ],
-          "correct": "B",
-          "explanation": "好问题时间鼓励学生提出'为什么''如果不这样会怎样''这个和那个有什么区别'等深度问题，不接受'是不是''对不对'这类不需要思考的问题。",
-          "errorAnalysis": "选A的没有区分问题质量，选C的限定了思考范围，选D的完全错误。",
-          "recommendation": "下节课尝试最后留5分钟做'好问题时间'。"
+{
+  "id": 1,
+  "type": "single",
+  "question": "每节课加入的'好问题时间'的规则是什么？",
+  "options": [
+    {"label": "A", "text": "不接受任何学生提问，全部由老师讲解"},
+    {"label": "B", "text": "不接受'是不是''对不对'这类低质量问题，鼓励提出'为什么''如果不这样会怎样'等深度问题"},
+    {"label": "C", "text": "只接受课本上有标准答案的问题"},
+    {"label": "D", "text": "学生可以随意提问，不需要任何规则"}
+  ],
+  "correct": "B",
+  "explanation": "好问题时间鼓励学生提出'为什么''如果不这样会怎样''这个和那个有什么区别'等深度问题，不接受'是不是''对不对'这类不需要思考的问题。",
+  "errorAnalysis": "选A的完全禁止提问，选C的限定了思考范围，选D的没有区分问题质量。",
+  "recommendation": "下节课尝试最后留5分钟做'好问题时间'。"
         },
         {
           "id": 2,
@@ -381,15 +381,15 @@
         {
           "id": 4,
           "type": "single",
-          "question": "AI时代课堂的时间分配建议是？",
+          "question": "AI时代一节课的时间分配建议是？",
           "options": [
-            {"label": "A", "text": "老师讲35分钟+学生练10分钟"},
-            {"label": "B", "text": "精讲重点15分钟+能力训练20分钟+总结反思10分钟"},
+            {"label": "A", "text": "老师讲30分钟+学生练10分钟"},
+            {"label": "B", "text": "精讲重点13分钟+能力训练18分钟+总结反思9分钟"},
             {"label": "C", "text": "全部由AI讲解"},
-            {"label": "D", "text": "学生自学45分钟"}
+            {"label": "D", "text": "学生自学40分钟"}
           ],
           "correct": "B",
-          "explanation": "把'知识传递'放到课前（用AI辅助），课堂时间用在最有价值的地方——精讲重点15分钟+能力训练20分钟+总结反思10分钟。核心是从'讲知识'到'练能力'。",
+          "explanation": "把'知识传递'放到课前（用AI辅助），课堂时间用在最有价值的地方——精讲重点13分钟+能力训练18分钟+总结反思9分钟。核心是从'讲知识'到'练能力'。",
           "errorAnalysis": "选A的是传统满堂灌模式，选C或D的放弃了教师主导作用。",
           "recommendation": "尝试用'前置学习+课堂精讲'的翻转课堂模式重新设计一节课。"
         },
@@ -489,6 +489,94 @@
           "explanation": "不是不讲知识，而是把'知识传递'放到课前（用AI辅助），把宝贵的课堂时间用在最有价值的地方——能力训练。知识是载体，能力是目标。",
           "errorAnalysis": "选B的没有转变，选C或D的走极端。",
           "recommendation": "设计一节'前置学习+课堂能力训练'的课，下学期实践。"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "调查问卷：平板教学意愿调查",
+      "section": "问卷调查",
+      "questions": [
+        {
+          "id": 20,
+          "type": "single",
+          "question": "您是否愿意在自己的课堂上尝试平板教学？",
+          "options": [
+            {"label": "A", "text": "非常愿意 —— 期待尽快尝试"},
+            {"label": "B", "text": "比较愿意 —— 如有条件愿意尝试"},
+            {"label": "C", "text": "一般 —— 视情况而定"},
+            {"label": "D", "text": "不太愿意 —— 顾虑较多"},
+            {"label": "E", "text": "完全不愿意 —— 不看好平板教学"}
+          ],
+          "correct": null,
+          "explanation": "",
+          "errorAnalysis": "",
+          "recommendation": ""
+        },
+        {
+          "id": 21,
+          "type": "single",
+          "question": "如果学校统一配备教学平板并提供培训，您是否愿意每周至少使用1次平板开展教学？",
+          "options": [
+            {"label": "A", "text": "非常愿意"},
+            {"label": "B", "text": "比较愿意"},
+            {"label": "C", "text": "一般"},
+            {"label": "D", "text": "不太愿意"},
+            {"label": "E", "text": "完全不愿意"}
+          ],
+          "correct": null,
+          "explanation": "",
+          "errorAnalysis": "",
+          "recommendation": ""
+        },
+        {
+          "id": 22,
+          "type": "multiple",
+          "question": "如果学校推进平板教学，您最希望优先获取以下哪些支持？（可多选，限选2项）",
+          "options": [
+            {"label": "A", "text": "硬件设备保障（教师终端+学生终端）"},
+            {"label": "B", "text": "系统化操作培训（从入门到精通）"},
+            {"label": "C", "text": "配套教学资源和课程内容"},
+            {"label": "D", "text": "技术人员的日常驻场支持"},
+            {"label": "E", "text": "先行试点班级的经验分享和观摩"},
+            {"label": "F", "text": "其他"}
+          ],
+          "correct": null,
+          "explanation": "",
+          "errorAnalysis": "",
+          "recommendation": ""
+        },
+        {
+          "id": 23,
+          "type": "multiple",
+          "question": "以下哪种平板教学应用场景对您最有吸引力？（可多选，限选2项）",
+          "options": [
+            {"label": "A", "text": "课堂实时互动（随堂练习、投票、抢答等）"},
+            {"label": "B", "text": "学生作业的自动批改与反馈"},
+            {"label": "C", "text": "基于学情数据的精准讲评与分层作业布置"},
+            {"label": "D", "text": "学生个性化学习路径推荐（如AI推题）"},
+            {"label": "E", "text": "课后微课资源推送与自主学习管理"},
+            {"label": "F", "text": "以上都不感兴趣"}
+          ],
+          "correct": null,
+          "explanation": "",
+          "errorAnalysis": "",
+          "recommendation": ""
+        },
+        {
+          "id": 24,
+          "type": "single",
+          "question": "您认为平板教学在学校推广的最佳路径是：",
+          "options": [
+            {"label": "A", "text": "自愿报名，小范围试点，逐步推广"},
+            {"label": "B", "text": "行政推动，全校统一推进"},
+            {"label": "C", "text": "分年级/分学科逐步推行"},
+            {"label": "D", "text": "不确定，要看实际情况"}
+          ],
+          "correct": null,
+          "explanation": "",
+          "errorAnalysis": "",
+          "recommendation": ""
         }
       ]
     }

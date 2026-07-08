@@ -645,6 +645,34 @@ function showResult(result) {
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('resultScreen').classList.add('active');
 
+  if (result.isSurvey) {
+    // 调查问卷：无分数，仅展示提交确认和选项汇总
+    document.getElementById('scoreCircle').style.display = 'none';
+    document.getElementById('correctInfo').textContent = `问卷提交成功！共 ${result.totalQuestions} 道题`;
+    document.getElementById('overallRec').textContent = '感谢您的参与，您的意见对我们非常重要！';
+    document.getElementById('overallRec').style.fontSize = '1.1em';
+
+    let detailHtml = '';
+    for (const d of result.details) {
+      const userAns = d.type === 'multiple' && Array.isArray(d.userAnswer)
+        ? d.userAnswer.join('、')
+        : (d.userAnswer || '未作答');
+
+      detailHtml += `
+        <div class="detail-card correct">
+          <div class="detail-header">
+            <span class="detail-badge correct">✓ 已提交</span>
+          </div>
+          <div class="detail-question">${d.question}</div>
+          <div class="detail-answer correct-text"><span class="label">你的选择：</span>${userAns}</div>
+        </div>
+      `;
+    }
+    document.getElementById('detailContainer').innerHTML = detailHtml;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
   // 分数圆环
   const score = result.score;
   const color = score >= 80 ? '#00d4ff' : score >= 60 ? '#ffd700' : '#e94560';

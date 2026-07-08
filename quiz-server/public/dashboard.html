@@ -364,6 +364,63 @@ function renderStats(data) {
     return;
   }
 
+  if (data.isSurvey) {
+    // 调查问卷：选项分布统计
+    const qStatsHtml = data.questionStats.map(q => {
+      const maxCount = Math.max(...q.distribution.map(d => d.count), 1);
+      const distBars = q.distribution.map(d => {
+        const pct = (d.count / maxCount) * 100;
+        const barColor = d.count > 0 ? '#00d4ff' : 'rgba(255,255,255,0.1)';
+        return `
+          <div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;font-size:0.85em;margin-bottom:4px">
+              <span style="color:rgba(255,255,255,0.7)">${d.label}. ${d.text}</span>
+              <span style="color:#00d4ff;font-weight:bold">${d.count}人 (${d.percent}%)</span>
+            </div>
+            <div style="height:6px;border-radius:3px;background:rgba(255,255,255,0.08);overflow:hidden">
+              <div style="height:100%;width:${pct}%;border-radius:3px;background:${barColor};transition:width 0.6s"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="q-stat-row">
+          <div class="q-stat-header">
+            <div class="q-stat-text">${q.questionId}. ${q.question}</div>
+          </div>
+          <div style="margin-top:8px">${distBars}</div>
+        </div>
+      `;
+    }).join('');
+
+    const recentHtml = data.recentSubmissions.map(s => {
+      const time = new Date(s.submittedAt).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+      return `
+        <div class="recent-item">
+          <span class="recent-name">${s.name}</span>
+          <span class="recent-time">${time}</span>
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value cyan">${data.totalResponses}</div>
+          <div class="stat-label">答卷人数</div>
+        </div>
+      </div>
+
+      <div class="section-title">问卷选项分布</div>
+      <div class="question-stats">${qStatsHtml}</div>
+
+      <div class="section-title">最近提交</div>
+      <div class="recent-list">${recentHtml}</div>
+    `;
+    return;
+  }
+
   // 分数分布柱状图
   const distColors = {
     '90-100': '#4ade80',

@@ -9,6 +9,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "qrcode": "^1.5.3",
-    "qrcodejs2": "^0.0.2"
+    "qrcodejs2": "^0.0.2",
+    "sql.js": "^1.14.1"
   }
 }

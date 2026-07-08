@@ -1,5 +1,7 @@
 node_modules/
 quiz-server/data.json
+quiz-server/data.json.bak
+quiz-server/data.db
 quiz-server/node_modules/
 .DS_Store
 Thumbs.db
