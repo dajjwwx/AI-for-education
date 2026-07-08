@@ -52,7 +52,7 @@ body {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .slide.active {
@@ -607,6 +607,9 @@ th {
   h2 { font-size: 1.6em; }
   p, li { font-size: 1.1em; }
   .two-col, .ability-grid { grid-template-columns: 1fr; }
+  .two-col .embed-video { max-height: 35vh; }
+  .video-box { padding: 15px; }
+  .video-box p { font-size: 0.9em; }
 }
 
 /* ===== 扫码答题幻灯片 ===== */
@@ -836,10 +839,20 @@ th {
   <div class="glow-orb orb-1" style="background:#ff6b6b"></div>
   <div class="glow-orb orb-3" style="background:#ffd700"></div>
   <h2 class="anim-up">🎬 开场视频：全球大厂开始招聘高中生？</h2>
-  <div class="anim-up" style="text-align:center">
-    <p style="margin-bottom:5px">📺 视频主讲：尹烨（生物学科普学家）· 核心观点：AI淘汰标准化劳动，企业招聘不再唯学历，能力优先</p>
-    <div class="embed-video">
-      <iframe src="https://player.bilibili.com/player.html?bvid=BV125Q4BEEq5&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;height:100%"></iframe>
+  <div class="two-col anim-up">
+    <div class="video-box">
+      <p>📺 尹烨（生物学科普学家）</p>
+      <p style="margin-top:8px;font-size:0.85em">AI淘汰标准化劳动，企业招聘不再唯学历，能力优先</p>
+      <div class="embed-video">
+        <iframe src="https://player.bilibili.com/player.html?bvid=BV125Q4BEEq5&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+    </div>
+    <div class="video-box">
+      <p>📺 成都七中教育实践案例</p>
+      <p style="margin-top:8px;font-size:0.85em">成都七中在AI时代的创新教育探索</p>
+      <div class="embed-video">
+        <iframe src="https://player.bilibili.com/player.html?bvid=BV1xTMG6vE1P&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
     </div>
   </div>
   <div class="discussion anim-up">
@@ -894,8 +907,8 @@ th {
   <div class="chapter-num anim-up">CHAPTER ONE</div>
   <h1 class="glow-text anim-up">AI时代稀缺的六大能力</h1>
   <p class="subtitle anim-up">人才培养目标重塑</p>
-  <div class="embed-video-small anim-up">
-    <iframe src="https://player.bilibili.com/player.html?bvid=BV1Q1DXBFEC4&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;height:100%"></iframe>
+  <div class="embed-video anim-up" style="max-width:800px">
+    <iframe src="https://player.bilibili.com/player.html?bvid=BV1Q1DXBFEC4&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
   </div>
   <div class="slide-num">5 / 29</div>
 </div>
@@ -1656,7 +1669,7 @@ async function loadQRStats(quizId) {
     const data = await res.json();
     renderQRStats(quizId, data);
   } catch (e) {
-    // 静默失败，服务器可能未启动
+    console.error('[loadQRStats] 请求失败 quizId=' + quizId + ':', e);
   }
 }
 

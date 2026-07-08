@@ -49,7 +49,7 @@ body {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .slide.active {
@@ -310,6 +310,23 @@ li { margin-bottom: 12px; }
 
 .video-box a { color: #fff; font-size: 1.2em; text-decoration: none; }
 .video-box a:hover { text-decoration: underline; }
+
+.embed-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(233,69,96,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 30px rgba(233,69,96,0.15);
+  margin: 12px auto;
+  background: #000;
+}
+.embed-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
 
 .qr-hint { font-size: 1em; color: rgba(255,255,255,0.5); margin-top: 10px; }
 
@@ -585,6 +602,9 @@ th {
   h2 { font-size: 1.6em; }
   p, li { font-size: 1.1em; }
   .two-col, .ability-grid { grid-template-columns: 1fr; }
+  .two-col .embed-video { max-height: 35vh; }
+  .video-box { padding: 15px; }
+  .video-box p { font-size: 0.9em; }
 }
 </style>
 </head>
@@ -630,11 +650,21 @@ th {
   <div class="glow-orb orb-1" style="background:#ff6b6b"></div>
   <div class="glow-orb orb-3" style="background:#ffd700"></div>
   <h2 class="anim-up">🎬 开场视频：全球大厂开始招聘高中生？</h2>
-  <div class="video-box anim-up pulse-glow">
-    <p>📺 视频主讲：尹烨（生物学科普学家）</p>
-    <p style="margin-top:15px">核心观点：AI淘汰标准化劳动，<br>企业招聘不再唯学历，能力优先</p>
-    <a href="https://www.bilibili.com/video/BV125Q4BEEq5" target="_blank" style="display:inline-block;margin-top:20px;padding:10px 25px;background:rgba(233,69,96,0.8);border-radius:8px;color:#fff;font-size:1.1em;text-decoration:none;box-shadow:0 0 20px rgba(233,69,96,0.5)">▶ 立即观看视频</a>
-    <p class="qr-hint" style="margin-top:10px">B站：BV125Q4BEEq5</p>
+  <div class="two-col anim-up">
+    <div class="video-box">
+      <p>📺 尹烨（生物学科普学家）</p>
+      <p style="margin-top:8px;font-size:0.85em">AI淘汰标准化劳动，企业招聘不再唯学历，能力优先</p>
+      <div class="embed-video">
+        <iframe src="https://player.bilibili.com/player.html?bvid=BV125Q4BEEq5&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+    </div>
+    <div class="video-box">
+      <p>📺 成都七中教育实践案例</p>
+      <p style="margin-top:8px;font-size:0.85em">成都七中在AI时代的创新教育探索</p>
+      <div class="embed-video">
+        <iframe src="https://player.bilibili.com/player.html?bvid=BV1xTMG6vE1P&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+    </div>
   </div>
   <div class="discussion anim-up">
     <p>💬 讨论：AI能取代什么？AI取代不了什么？</p>
@@ -668,7 +698,9 @@ th {
   <h1 class="glow-text anim-up">AI时代稀缺的六大能力</h1>
   <div class="chapter-line anim-up"></div>
   <p class="subtitle anim-up">人才培养目标重塑</p>
-  <a href="https://www.bilibili.com/video/BV1Q1DXBFEC4" target="_blank" class="anim-up" style="display:inline-block;margin-top:15px;padding:8px 20px;background:rgba(0,212,255,0.3);border:1px solid #00d4ff;border-radius:8px;color:#00d4ff;font-size:0.9em;text-decoration:none;box-shadow:0 0 15px rgba(0,212,255,0.3)">▶ 配合视频：黄仁勋·AI时代6大稀缺能力</a>
+  <div class="embed-video anim-up" style="max-width:800px">
+    <iframe src="https://player.bilibili.com/player.html?bvid=BV1Q1DXBFEC4&page=1&high_quality=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+  </div>
   <div class="slide-num">5 / 29</div>
 </div>
 

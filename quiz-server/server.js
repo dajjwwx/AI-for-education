@@ -334,6 +334,9 @@ app.post('/api/submit/:id', (req, res) => {
 
 // 获取某个quiz的统计
 app.get('/api/stats/:id', (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   const quizId = parseInt(req.params.id);
   const quiz = questionsData.quizzes.find(q => q.id === quizId);
   if (!quiz) return res.status(404).json({ error: 'Quiz not found' });
